@@ -3,510 +3,698 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Payout Report · May 18-24</title>
+    <title>Payout Report · May 18-24 · Complete</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <style>
       body {
         font-family: "Inter", system-ui, sans-serif;
+        background: #fafaf7;
       }
       .serif {
         font-family: "Source Serif 4", Georgia, serif;
       }
-      @media print {
-        .no-print {
-          display: none !important;
-        }
-        body {
-          background: white !important;
-        }
+      .num {
+        font-variant-numeric: tabular-nums;
+      }
+      [data-row]:not(.open) .row-detail {
+        display: none;
+      }
+      [data-row].open .chevron {
+        transform: rotate(180deg);
       }
     </style>
   </head>
-  <body class="bg-slate-50 min-h-screen">
+  <body class="min-h-screen">
     <!-- Top bar -->
-    <header
-      class="border-b border-slate-200 bg-white px-8 py-4 flex items-center justify-between no-print"
-    >
+    <header class="px-8 py-5 flex items-center justify-between">
       <nav class="flex items-center gap-2 text-sm text-slate-500">
         <a href="./index.html" class="hover:text-slate-900">⌂</a>
         <span class="text-slate-300">›</span>
         <span>CSRs</span>
         <span class="text-slate-300">›</span>
-        <span class="text-violet-600 font-medium">Payout Report · May 18 - May 24</span>
+        <span class="text-slate-900">May 18-24 · Complete</span>
       </nav>
-      <div class="flex items-center gap-3">
-        <button
-          onclick="window.print()"
-          class="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-md hover:bg-slate-100"
-        >
-          Print / PDF
-        </button>
-        <button
-          class="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-md hover:bg-slate-100"
-        >
-          Share
-        </button>
+      <div class="flex items-center gap-2">
         <a
           href="./index.html"
-          class="text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-4 py-1.5 rounded-md"
+          class="text-sm text-slate-600 hover:text-slate-900 px-4 py-2 rounded-md border border-slate-200 bg-white"
+          >Return to plan</a
         >
-          Done
-        </a>
+        <button
+          class="text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-4 py-2 rounded-md"
+        >
+          View payouts →
+        </button>
       </div>
     </header>
 
-    <main class="mx-auto max-w-5xl px-8 py-10">
-      <!-- Status / completed step indicator -->
-      <div class="flex items-center justify-center gap-4 no-print">
-        <div class="flex items-center gap-2">
-          <div
-            class="h-7 w-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-semibold"
-          >
-            ✓
-          </div>
-          <span class="text-sm text-slate-500">Enter Results</span>
-        </div>
-        <div class="h-px w-12 bg-emerald-300"></div>
-        <div class="flex items-center gap-2">
-          <div
-            class="h-7 w-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-semibold"
-          >
-            ✓
-          </div>
-          <span class="text-sm text-slate-500">Awards & Insights</span>
-        </div>
-        <div class="h-px w-12 bg-emerald-300"></div>
-        <div class="flex items-center gap-2">
-          <div
-            class="h-7 w-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-semibold"
-          >
-            ✓
-          </div>
-          <span class="text-sm text-slate-500">Finalized</span>
-        </div>
-        <div class="h-px w-12 bg-violet-300"></div>
-        <div class="flex items-center gap-2">
-          <div
-            class="h-7 w-7 rounded-full bg-violet-600 text-white flex items-center justify-center text-xs font-semibold"
-          >
-            ★
-          </div>
-          <span class="text-sm font-semibold text-slate-900">Report</span>
-        </div>
-      </div>
-
-      <!-- Heading -->
-      <div class="mt-10 flex items-start justify-between gap-6">
+    <main class="mx-auto max-w-4xl px-8 py-2 pb-20">
+      <!-- Status -->
+      <div class="flex items-center gap-2 mb-6">
+        <span class="text-emerald-600 text-lg">●</span>
         <div>
-          <div
-            class="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-emerald-700"
-          >
-            <span
-              class="inline-block h-2 w-2 rounded-full bg-emerald-500"
-            ></span>
-            Paid · May 6, 2026
-          </div>
-          <h1 class="mt-2 text-4xl serif text-slate-900">
-            Payout report · May 18-24
-          </h1>
-          <p class="mt-2 text-slate-600">
-            Final summary for CSRs pay period. Employees were notified by email
-            and Slack on May 6.
+          <p class="text-sm font-semibold text-slate-900">May 18-24 finalized</p>
+          <p class="text-xs text-slate-500">
+            Payouts queued for May 22 deposit · 3 employees notified
           </p>
         </div>
       </div>
 
-      <!-- 4 summary tiles (same as awards page) -->
-      <section class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <p class="text-xs font-medium text-slate-500">Pay period</p>
-          <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
-            May 18-24
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <p class="text-xs font-medium text-slate-500">Participants</p>
-          <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
-            3
-          </p>
-        </div>
-        <div class="rounded-xl border border-emerald-100 bg-emerald-50/40 p-5">
-          <p class="text-xs font-medium text-emerald-700">Total paid</p>
-          <p class="mt-2 text-2xl font-semibold tracking-tight text-emerald-700">
-            $1,253
-          </p>
-          <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
-            <span>↗</span><span class="font-medium">+9%</span>
-            <span class="text-slate-400 ml-1">vs $1,148 prior</span>
-          </div>
-        </div>
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <p class="text-xs font-medium text-slate-500">Avg. award</p>
-          <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
-            $418
-          </p>
-          <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
-            <span>↗</span><span class="font-medium">+9%</span>
-            <span class="text-slate-400 ml-1">vs $383 prior</span>
-          </div>
-        </div>
-      </section>
+      <!-- Hero headline -->
+      <h1 class="serif text-5xl text-slate-900 leading-tight tracking-tight">
+        This week&apos;s payout moved
+        <span class="text-emerald-700 italic">$8.2K</span> of new revenue.
+      </h1>
+      <p class="mt-3 text-slate-600">
+        What you paid for, what showed up — by metric.
+      </p>
 
-      <!-- AI insight (read-only here, with sources baked in) -->
+      <!-- 4-column stats -->
       <section
-        class="mt-6 rounded-xl border border-violet-200 bg-gradient-to-br from-violet-50/60 to-white p-6"
+        class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-4 border-y border-slate-200 py-6"
       >
-        <div class="flex items-start gap-3">
-          <div
-            class="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-100 shrink-0"
-          >
-            <svg
-              class="h-4 w-4 text-violet-700"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l1.5 4.5L19 9l-4.5 1.5L13 15l-1.5-4.5L7 9l4.5-1.5L13 3z"
-              />
-            </svg>
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 flex-wrap">
-              <span
-                class="text-[10px] font-semibold uppercase tracking-wider text-violet-700"
-                >AI Summary</span
-              >
-              <span class="text-[10px] text-slate-400"
-                >Generated at finalization · locked</span
-              >
-            </div>
-            <h3 class="mt-1 text-base font-semibold text-slate-900">
-              Payout up 9% — quality + conversion drove it.
-            </h3>
-            <ul class="mt-3 space-y-2">
-              <li class="flex items-start gap-2 text-sm text-slate-700">
-                <span>📈</span>
-                <span>
-                  Total payout up $105 (9%) vs last week, driven by a 34-call
-                  jump in volume and 4 percentage-point lift in booking
-                  conversion.
-                </span>
-              </li>
-              <li class="flex items-start gap-2 text-sm text-slate-700">
-                <span>⭐</span>
-                <span>
-                  5★ reviews and memberships both grew sharply — 14 reviews
-                  (+3) and 6 memberships (+3), adding ~$2,320 in estimated
-                  downstream value.
-                </span>
-              </li>
-              <li class="flex items-start gap-2 text-sm text-slate-700">
-                <span>🏆</span>
-                <span>
-                  Amber Slye outperformed on every revenue-linked metric: 128
-                  calls handled, 81% booking conversion, and 3 of the 6
-                  memberships sold.
-                </span>
-              </li>
-              <li class="flex items-start gap-2 text-sm text-slate-700">
-                <span>⚠️</span>
-                <span>
-                  First Call Resolution dipped 2pp to 84% — worth a check that
-                  volume gains aren&apos;t coming at the cost of call quality.
-                </span>
-              </li>
-            </ul>
-            <div class="mt-4 flex items-center gap-3 text-xs no-print">
-              <button class="text-slate-500 hover:text-slate-700">
-                Copy for Slack
-              </button>
-              <span class="text-slate-300">·</span>
-              <button class="text-slate-500 hover:text-slate-700">
-                Email to leadership
-              </button>
-              <span class="text-slate-300">·</span>
-              <button class="text-slate-500 hover:text-slate-700">
-                Export as PDF
-              </button>
-            </div>
-          </div>
+        <div>
+          <p class="text-[11px] uppercase tracking-wider text-slate-500">
+            Total paid
+          </p>
+          <p class="mt-1 serif text-2xl text-slate-900 num">$1,253</p>
+          <p class="mt-0.5 text-xs text-emerald-700">↗ +9% vs prior week</p>
+        </div>
+        <div>
+          <p class="text-[11px] uppercase tracking-wider text-slate-500">
+            Earned
+          </p>
+          <p class="mt-1 serif text-2xl text-slate-900 num">3 of 3</p>
+          <p class="mt-0.5 text-xs text-slate-500">all participants earned</p>
+        </div>
+        <div>
+          <p class="text-[11px] uppercase tracking-wider text-slate-500">
+            Revenue lift
+          </p>
+          <p class="mt-1 serif text-2xl text-slate-900 num">+$8,240</p>
+          <p class="mt-0.5 text-xs text-slate-500">vs prior week</p>
+        </div>
+        <div>
+          <p class="text-[11px] uppercase tracking-wider text-slate-500">
+            Plan ROI
+          </p>
+          <p class="mt-1 serif text-2xl text-slate-900 num">6.6×</p>
+          <p class="mt-0.5 text-xs text-slate-500">revenue per $1 paid</p>
         </div>
       </section>
 
-      <!-- Per-metric aggregate widgets — moved here from the awards page -->
-      <section class="mt-10">
-        <div class="mb-4">
-          <h2 class="text-lg font-semibold text-slate-900">
-            Metrics this period
-          </h2>
-          <p class="text-sm text-slate-500">
-            Aggregate across all 3 participants vs prior period — the underlying
-            evidence behind the AI summary above.
+      <!-- Net delivered callout -->
+      <section
+        class="mt-8 rounded-2xl bg-emerald-50/60 border border-emerald-100 p-7 flex items-center gap-8"
+      >
+        <div class="shrink-0">
+          <p class="serif text-5xl text-emerald-700 leading-none">+$6.9K</p>
+          <p class="mt-2 text-[11px] uppercase tracking-wider text-slate-600">
+            Net delivered to business
           </p>
         </div>
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
-          <!-- Calls Handled -->
-          <div class="rounded-xl border border-slate-200 bg-white p-4">
-            <p class="text-xs font-medium text-slate-500">Calls Handled</p>
-            <div class="mt-1 flex items-baseline gap-2">
-              <p class="text-xl font-semibold text-slate-900 tracking-tight">
-                342
+        <div class="text-sm text-slate-700 leading-relaxed">
+          You paid <span class="font-semibold">$1,253</span> in awards. The
+          behavior moved <span class="font-semibold">$8,240</span> of new
+          revenue this period — every $1 returned
+          <span class="font-semibold">$6.58</span>.
+        </div>
+      </section>
+
+      <!-- By metric -->
+      <section class="mt-12">
+        <div class="flex items-baseline justify-between mb-5">
+          <h2 class="serif text-2xl text-slate-900">By metric</h2>
+          <p class="text-xs text-slate-500">
+            Each rule in this plan, what it earned, what it reinforced.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- Calls Handled — sparkline -->
+          <article
+            class="rounded-xl border border-slate-200 bg-white p-5"
+          >
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Calls Handled
               </p>
               <span
-                class="text-[10px] uppercase tracking-wider text-slate-400"
-                >Team total</span
+                class="text-[10px] uppercase tracking-wider text-slate-400 px-1.5 py-0.5 rounded bg-slate-100"
+                >volume · summed</span
               >
             </div>
-            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
-              <span>↗</span><span class="font-medium">+34 calls</span>
-              <span class="text-slate-400 ml-1">vs 308 prior</span>
-            </div>
-            <div class="mt-3 pt-3 border-t border-slate-100">
-              <p class="text-[11px] text-slate-500">
-                <span
-                  class="inline-block h-4 w-4 mr-1 rounded-full bg-blue-100 text-blue-700 text-[9px] font-semibold leading-4 text-center align-middle"
+            <p class="serif text-3xl text-slate-900 num">
+              342
+              <span class="text-xs text-emerald-700 ml-1 font-sans">↗ +11%</span>
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              34 more calls than prior week — drove most of the booking
+              conversion lift.
+            </p>
+            <svg
+              viewBox="0 0 240 60"
+              class="mt-3 w-full h-14"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0,48 L40,42 L80,46 L120,30 L160,38 L200,28 L240,12 L240,60 L0,60 Z"
+                fill="url(#g1)"
+              />
+              <polyline
+                points="0,48 40,42 80,46 120,30 160,38 200,28 240,12"
+                fill="none"
+                stroke="#10b981"
+                stroke-width="2"
+              />
+              <circle cx="240" cy="12" r="3" fill="#10b981" />
+            </svg>
+            <div class="mt-3 flex items-center gap-2 flex-wrap text-[11px]">
+              <span class="text-slate-500">Top:</span>
+              <span class="rounded bg-slate-50 border border-slate-200 px-1.5 py-0.5"
+                ><span
+                  class="inline-block h-3.5 w-3.5 mr-1 rounded-full bg-blue-100 text-blue-700 text-[8px] font-semibold leading-[14px] text-center align-middle"
                   >AS</span
-                ><span class="font-medium text-slate-700">Amber Slye</span> led
-                with 128
-              </p>
+                >Amber 128</span
+              >
+              <span class="rounded bg-slate-50 border border-slate-200 px-1.5 py-0.5"
+                ><span
+                  class="inline-block h-3.5 w-3.5 mr-1 rounded-full bg-blue-100 text-blue-700 text-[8px] font-semibold leading-[14px] text-center align-middle"
+                  >CW</span
+                >Carli 112</span
+              >
+              <span class="rounded bg-slate-50 border border-slate-200 px-1.5 py-0.5"
+                ><span
+                  class="inline-block h-3.5 w-3.5 mr-1 rounded-full bg-blue-100 text-blue-700 text-[8px] font-semibold leading-[14px] text-center align-middle"
+                  >JM</span
+                >Jordyn 102</span
+              >
             </div>
-          </div>
+          </article>
 
           <!-- Booking Conversion -->
-          <div class="rounded-xl border border-slate-200 bg-white p-4">
-            <p class="text-xs font-medium text-slate-500">Booking Conversion</p>
-            <div class="mt-1 flex items-baseline gap-2">
-              <p class="text-xl font-semibold text-slate-900 tracking-tight">
-                72%
+          <article
+            class="rounded-xl border border-slate-200 bg-white p-5"
+          >
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Booking Conversion
               </p>
               <span
-                class="text-[10px] uppercase tracking-wider text-slate-400"
-                >Team avg</span
+                class="text-[10px] uppercase tracking-wider text-slate-400 px-1.5 py-0.5 rounded bg-slate-100"
+                >rate · averaging</span
               >
             </div>
-            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
-              <span>↗</span><span class="font-medium">+4.0 pp</span>
-              <span class="text-slate-400 ml-1">vs 68% prior</span>
-            </div>
-            <div class="mt-3 pt-3 border-t border-slate-100">
-              <p class="text-[11px] text-slate-500">
-                <span
-                  class="inline-block h-4 w-4 mr-1 rounded-full bg-blue-100 text-blue-700 text-[9px] font-semibold leading-4 text-center align-middle"
+            <p class="serif text-3xl text-slate-900 num">
+              72%
+              <span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +4.0 pp</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              4-pp lift; Amber held above 80% all week.
+            </p>
+            <svg
+              viewBox="0 0 240 60"
+              class="mt-3 w-full h-14"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0,40 L40,38 L80,42 L120,36 L160,30 L200,28 L240,18 L240,60 L0,60 Z"
+                fill="url(#g2)"
+              />
+              <polyline
+                points="0,40 40,38 80,42 120,36 160,30 200,28 240,18"
+                fill="none"
+                stroke="#10b981"
+                stroke-width="2"
+              />
+              <circle cx="240" cy="18" r="3" fill="#10b981" />
+            </svg>
+            <div class="mt-3 flex items-center gap-2 flex-wrap text-[11px]">
+              <span class="text-slate-500">Top:</span>
+              <span class="rounded bg-slate-50 border border-slate-200 px-1.5 py-0.5"
+                ><span
+                  class="inline-block h-3.5 w-3.5 mr-1 rounded-full bg-blue-100 text-blue-700 text-[8px] font-semibold leading-[14px] text-center align-middle"
                   >AS</span
-                ><span class="font-medium text-slate-700">Amber Slye</span> led
-                with 81%
-              </p>
+                >Amber 81%</span
+              >
+              <span class="rounded bg-slate-50 border border-slate-200 px-1.5 py-0.5"
+                ><span
+                  class="inline-block h-3.5 w-3.5 mr-1 rounded-full bg-blue-100 text-blue-700 text-[8px] font-semibold leading-[14px] text-center align-middle"
+                  >CW</span
+                >Carli 71%</span
+              >
+              <span class="rounded bg-slate-50 border border-slate-200 px-1.5 py-0.5"
+                ><span
+                  class="inline-block h-3.5 w-3.5 mr-1 rounded-full bg-blue-100 text-blue-700 text-[8px] font-semibold leading-[14px] text-center align-middle"
+                  >JM</span
+                >Jordyn 64%</span
+              >
             </div>
-          </div>
+          </article>
 
           <!-- 5★ Reviews -->
-          <div class="rounded-xl border border-slate-200 bg-white p-4">
-            <p class="text-xs font-medium text-slate-500">5★ Reviews</p>
-            <div class="mt-1 flex items-baseline gap-2">
-              <p class="text-xl font-semibold text-slate-900 tracking-tight">
-                14
-              </p>
+          <article
+            class="rounded-xl border border-slate-200 bg-white p-5"
+          >
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">5★ Reviews</p>
               <span
-                class="text-[10px] uppercase tracking-wider text-slate-400"
-                >Team total</span
+                class="text-[10px] uppercase tracking-wider text-slate-400 px-1.5 py-0.5 rounded bg-slate-100"
+                >piece rate · summed</span
               >
             </div>
-            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
-              <span>↗</span><span class="font-medium">+3 reviews</span>
-              <span class="text-slate-400 ml-1">vs 11 prior</span>
+            <p class="serif text-3xl text-slate-900 num">
+              14
+              <span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +3 reviews</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Imputed value ~<span class="text-amber-700 font-semibold"
+                >$1,120</span
+              >
+              · avg revenue from review-driven leads.
+            </p>
+            <div class="mt-4 grid grid-cols-3 gap-1.5">
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-2 text-center"
+              >
+                <div
+                  class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-[10px] font-semibold mb-0.5"
+                >
+                  AS
+                </div>
+                <p class="text-[11px] text-slate-600">Amber</p>
+                <p class="text-sm font-semibold text-slate-900 num">6</p>
+              </div>
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-2 text-center"
+              >
+                <div
+                  class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-[10px] font-semibold mb-0.5"
+                >
+                  CW
+                </div>
+                <p class="text-[11px] text-slate-600">Carli</p>
+                <p class="text-sm font-semibold text-slate-900 num">5</p>
+              </div>
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-2 text-center"
+              >
+                <div
+                  class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-[10px] font-semibold mb-0.5"
+                >
+                  JM
+                </div>
+                <p class="text-[11px] text-slate-600">Jordyn</p>
+                <p class="text-sm font-semibold text-slate-900 num">3</p>
+              </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100">
-              <p class="text-[11px] text-slate-500">
-                <span class="text-amber-700 font-semibold">~$1,120</span>
-                estimated value — avg revenue from review-driven leads
-              </p>
-            </div>
-          </div>
+          </article>
 
           <!-- Memberships -->
-          <div class="rounded-xl border border-slate-200 bg-white p-4">
-            <p class="text-xs font-medium text-slate-500">Memberships Sold</p>
-            <div class="mt-1 flex items-baseline gap-2">
-              <p class="text-xl font-semibold text-slate-900 tracking-tight">
-                6
+          <article
+            class="rounded-xl border border-slate-200 bg-white p-5"
+          >
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Memberships Sold
               </p>
               <span
-                class="text-[10px] uppercase tracking-wider text-slate-400"
-                >Team total</span
+                class="text-[10px] uppercase tracking-wider text-slate-400 px-1.5 py-0.5 rounded bg-slate-100"
+                >piece rate · summed</span
               >
             </div>
-            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
-              <span>↗</span><span class="font-medium">+3 memberships</span>
-              <span class="text-slate-400 ml-1">vs 3 prior</span>
+            <p class="serif text-3xl text-slate-900 num">
+              6
+              <span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +3 vs prior</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Imputed value ~<span class="text-amber-700 font-semibold"
+                >$1,200</span
+              >
+              · est. annual revenue per membership.
+            </p>
+            <div class="mt-4 grid grid-cols-3 gap-1.5">
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-2 text-center"
+              >
+                <div
+                  class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-[10px] font-semibold mb-0.5"
+                >
+                  AS
+                </div>
+                <p class="text-[11px] text-slate-600">Amber</p>
+                <p class="text-sm font-semibold text-slate-900 num">3</p>
+              </div>
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-2 text-center"
+              >
+                <div
+                  class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-[10px] font-semibold mb-0.5"
+                >
+                  CW
+                </div>
+                <p class="text-[11px] text-slate-600">Carli</p>
+                <p class="text-sm font-semibold text-slate-900 num">2</p>
+              </div>
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-2 text-center"
+              >
+                <div
+                  class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-[10px] font-semibold mb-0.5"
+                >
+                  JM
+                </div>
+                <p class="text-[11px] text-slate-600">Jordyn</p>
+                <p class="text-sm font-semibold text-slate-900 num">1</p>
+              </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100 space-y-1">
-              <p class="text-[11px] text-slate-500">
-                <span class="text-amber-700 font-semibold">~$1,200</span>
-                estimated value — est. annual revenue per membership
-              </p>
-              <p class="text-[11px] text-slate-500">
-                <span
-                  class="inline-block h-4 w-4 mr-1 rounded-full bg-blue-100 text-blue-700 text-[9px] font-semibold leading-4 text-center align-middle"
-                  >AS</span
-                ><span class="font-medium text-slate-700">Amber Slye</span> led
-                with 3
-              </p>
-            </div>
-          </div>
+          </article>
 
           <!-- First Call Resolution -->
-          <div class="rounded-xl border border-slate-200 bg-white p-4">
-            <p class="text-xs font-medium text-slate-500">
-              First Call Resolution
-            </p>
-            <div class="mt-1 flex items-baseline gap-2">
-              <p class="text-xl font-semibold text-slate-900 tracking-tight">
-                84%
+          <article
+            class="rounded-xl border border-slate-200 bg-white p-5"
+          >
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                First Call Resolution
               </p>
               <span
-                class="text-[10px] uppercase tracking-wider text-slate-400"
-                >Team avg</span
+                class="text-[10px] uppercase tracking-wider text-slate-400 px-1.5 py-0.5 rounded bg-slate-100"
+                >rate · averaging</span
               >
             </div>
-            <div class="mt-1 flex items-center gap-1 text-xs text-rose-700">
-              <span>↘</span><span class="font-medium">-2.0 pp</span>
-              <span class="text-slate-400 ml-1">vs 86% prior</span>
-            </div>
-          </div>
+            <p class="serif text-3xl text-slate-900 num">
+              84%
+              <span class="text-xs text-rose-700 ml-1 font-sans">↘ -2.0 pp</span>
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Slight dip — likely tradeoff from higher call volume. Worth a
+              spot-check.
+            </p>
+            <svg
+              viewBox="0 0 240 60"
+              class="mt-3 w-full h-14"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.18" />
+                  <stop offset="100%" stop-color="#f43f5e" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0,18 L40,16 L80,20 L120,22 L160,18 L200,22 L240,28 L240,60 L0,60 Z"
+                fill="url(#g3)"
+              />
+              <polyline
+                points="0,18 40,16 80,20 120,22 160,18 200,22 240,28"
+                fill="none"
+                stroke="#f43f5e"
+                stroke-width="2"
+              />
+              <circle cx="240" cy="28" r="3" fill="#f43f5e" />
+            </svg>
+          </article>
 
           <!-- Callbacks -->
-          <div class="rounded-xl border border-slate-200 bg-white p-4">
-            <p class="text-xs font-medium text-slate-500">Callbacks</p>
-            <div class="mt-1 flex items-baseline gap-2">
-              <p class="text-xl font-semibold text-slate-900 tracking-tight">
-                4
-              </p>
+          <article
+            class="rounded-xl border border-slate-200 bg-white p-5"
+          >
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">Callbacks</p>
               <span
-                class="text-[10px] uppercase tracking-wider text-slate-400"
-                >Team total</span
+                class="text-[10px] uppercase tracking-wider text-slate-400 px-1.5 py-0.5 rounded bg-slate-100"
+                >count · lower = better</span
               >
             </div>
-            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
-              <span>↘</span><span class="font-medium">-3 callbacks</span>
-              <span class="text-slate-400 ml-1"
-                >vs 7 prior (lower = better)</span
+            <p class="serif text-3xl text-slate-900 num">
+              4
+              <span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↘ -3 (good)</span
               >
-            </div>
-          </div>
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Lowest count in the last 6 weeks.
+            </p>
+            <svg
+              viewBox="0 0 240 60"
+              class="mt-3 w-full h-14"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0,18 L40,22 L80,16 L120,28 L160,32 L200,36 L240,44 L240,60 L0,60 Z"
+                fill="url(#g4)"
+              />
+              <polyline
+                points="0,18 40,22 80,16 120,28 160,32 200,36 240,44"
+                fill="none"
+                stroke="#10b981"
+                stroke-width="2"
+              />
+              <circle cx="240" cy="44" r="3" fill="#10b981" />
+            </svg>
+          </article>
         </div>
       </section>
 
-      <!-- Final payments table -->
-      <section class="mt-10">
-        <h2 class="text-lg font-semibold text-slate-900 mb-3">
-          Payments issued
-        </h2>
-        <div
-          class="rounded-xl border border-slate-200 bg-white overflow-hidden divide-y divide-slate-100"
-        >
+      <!-- Standouts -->
+      <section class="mt-12">
+        <div class="flex items-baseline justify-between mb-5">
+          <h2 class="serif text-2xl text-slate-900">Standouts</h2>
+          <p class="text-xs text-slate-500">Per-employee narrative</p>
+        </div>
+
+        <div class="space-y-2">
+          <!-- Amber -->
           <div
-            class="px-5 py-4 flex items-center justify-between hover:bg-slate-50"
+            data-row
+            class="open rounded-xl border border-slate-200 bg-white"
           >
-            <div class="flex items-center gap-3">
-              <div
-                class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
-              >
-                AS
+            <button
+              class="row-toggle w-full px-5 py-4 flex items-center justify-between"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
+                >
+                  AS
+                </div>
+                <div class="text-left">
+                  <p class="text-sm font-semibold text-slate-900">Amber Slye</p>
+                  <p class="text-[11px] text-slate-500">CSR</p>
+                </div>
               </div>
-              <div>
-                <p class="text-sm font-semibold text-slate-900">Amber Slye</p>
-                <p class="text-xs text-slate-500">Paid May 6 · ACH ending 4421</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <span
-                class="text-[10px] font-semibold uppercase tracking-wider rounded px-1.5 py-0.5 bg-emerald-100 text-emerald-700"
-                >Paid</span
-              >
-              <p class="text-lg font-semibold text-emerald-700">$512</p>
-            </div>
-          </div>
-          <div
-            class="px-5 py-4 flex items-center justify-between hover:bg-slate-50"
-          >
-            <div class="flex items-center gap-3">
-              <div
-                class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
-              >
-                CW
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-slate-900">Carli Waits</p>
-                <p class="text-xs text-slate-500">Paid May 6 · ACH ending 8812</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <span
-                class="text-[10px] font-semibold uppercase tracking-wider rounded px-1.5 py-0.5 bg-emerald-100 text-emerald-700"
-                >Paid</span
-              >
-              <p class="text-lg font-semibold text-emerald-700">$401</p>
-            </div>
-          </div>
-          <div
-            class="px-5 py-4 flex items-center justify-between hover:bg-slate-50"
-          >
-            <div class="flex items-center gap-3">
-              <div
-                class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
-              >
-                JM
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-slate-900">
-                  Jordyn Martsching
+              <div class="flex items-center gap-4">
+                <span
+                  class="text-[11px] rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 px-2.5 py-1"
+                >
+                  ✦ Top performer — led every revenue-linked metric
+                </span>
+                <p class="text-base font-semibold text-slate-900 num">
+                  $512
                 </p>
-                <p class="text-xs text-slate-500">Paid May 6 · ACH ending 0337</p>
+                <span class="chevron text-slate-400 transition-transform">▾</span>
+              </div>
+            </button>
+            <div
+              class="row-detail border-t border-slate-100 divide-y divide-slate-100 text-sm"
+            >
+              <div
+                class="flex items-center justify-between px-5 py-2.5"
+              >
+                <div>
+                  <p class="text-slate-700">Booking Commission</p>
+                </div>
+                <div class="flex items-center gap-6">
+                  <p class="text-[11px] text-slate-500 num">
+                    $7,200 × 4%
+                  </p>
+                  <p class="font-semibold text-slate-900 num w-16 text-right">
+                    $288
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-between px-5 py-2.5"
+              >
+                <div>
+                  <p class="text-slate-700">Calls Handled</p>
+                </div>
+                <div class="flex items-center gap-6">
+                  <p class="text-[11px] text-slate-500 num">128 × $0.75</p>
+                  <p class="font-semibold text-slate-900 num w-16 text-right">
+                    $96
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-between px-5 py-2.5"
+              >
+                <div>
+                  <p class="text-slate-700">5★ Reviews</p>
+                </div>
+                <div class="flex items-center gap-6">
+                  <p class="text-[11px] text-slate-500 num">6 × $8</p>
+                  <p class="font-semibold text-slate-900 num w-16 text-right">
+                    $48
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-between px-5 py-2.5"
+              >
+                <div>
+                  <p class="text-slate-700">Memberships Sold</p>
+                </div>
+                <div class="flex items-center gap-6">
+                  <p class="text-[11px] text-slate-500 num">3 × $20</p>
+                  <p class="font-semibold text-slate-900 num w-16 text-right">
+                    $60
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-between px-5 py-2.5"
+              >
+                <div>
+                  <p class="text-slate-700">FCR Bonus</p>
+                </div>
+                <div class="flex items-center gap-6">
+                  <p class="text-[11px] text-slate-500 num">88% &gt; 85%</p>
+                  <p class="font-semibold text-slate-900 num w-16 text-right">
+                    $20
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-between px-5 py-3 bg-slate-50/50"
+              >
+                <p class="text-slate-700 font-medium">Total pay this period</p>
+                <p class="font-semibold text-emerald-700 num">$512</p>
               </div>
             </div>
-            <div class="flex items-center gap-4">
-              <span
-                class="text-[10px] font-semibold uppercase tracking-wider rounded px-1.5 py-0.5 bg-emerald-100 text-emerald-700"
-                >Paid</span
-              >
-              <p class="text-lg font-semibold text-emerald-700">$340</p>
+          </div>
+
+          <!-- Carli -->
+          <div data-row class="rounded-xl border border-slate-200 bg-white">
+            <button
+              class="row-toggle w-full px-5 py-4 flex items-center justify-between"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
+                >
+                  CW
+                </div>
+                <div class="text-left">
+                  <p class="text-sm font-semibold text-slate-900">
+                    Carli Waits
+                  </p>
+                  <p class="text-[11px] text-slate-500">CSR</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="text-[11px] rounded-full bg-violet-50 border border-violet-200 text-violet-700 px-2.5 py-1"
+                >
+                  ↗ Steady — third week above target
+                </span>
+                <p class="text-base font-semibold text-slate-900 num">
+                  $401
+                </p>
+                <span class="chevron text-slate-400 transition-transform">▾</span>
+              </div>
+            </button>
+            <div
+              class="row-detail border-t border-slate-100 px-5 py-4 text-sm text-slate-500 italic"
+            >
+              Per-rule breakdown (collapsed) — open to see line items.
             </div>
           </div>
-        </div>
 
-        <div
-          class="mt-4 rounded-lg bg-slate-50 px-5 py-4 flex items-center justify-between"
-        >
-          <div>
-            <p class="text-xs text-slate-500">
-              3 employees · CSRs · May 18-24
-            </p>
-            <p class="text-sm font-semibold text-slate-900 mt-0.5">
-              Total paid this period
-            </p>
+          <!-- Jordyn -->
+          <div data-row class="rounded-xl border border-slate-200 bg-white">
+            <button
+              class="row-toggle w-full px-5 py-4 flex items-center justify-between"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
+                >
+                  JM
+                </div>
+                <div class="text-left">
+                  <p class="text-sm font-semibold text-slate-900">
+                    Jordyn Martsching
+                  </p>
+                  <p class="text-[11px] text-slate-500">CSR · new hire</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="text-[11px] rounded-full bg-amber-50 border border-amber-200 text-amber-700 px-2.5 py-1"
+                >
+                  ⚠ FCR below threshold — coaching opportunity
+                </span>
+                <p class="text-base font-semibold text-slate-900 num">
+                  $340
+                </p>
+                <span class="chevron text-slate-400 transition-transform">▾</span>
+              </div>
+            </button>
+            <div
+              class="row-detail border-t border-slate-100 px-5 py-4 text-sm text-slate-500 italic"
+            >
+              Per-rule breakdown (collapsed) — open to see line items.
+            </div>
           </div>
-          <p class="text-2xl font-semibold text-emerald-700">$1,253</p>
         </div>
       </section>
 
-      <!-- Footer audit info -->
-      <footer class="mt-10 pt-6 border-t border-slate-200 text-xs text-slate-500">
-        <p>
-          Finalized by Danielle Goldberg on May 6, 2026 at 10:42 AM ET. AI
-          summary generated from data snapshot at finalization. Report ID:
-          <code class="px-1 bg-slate-100 rounded">rpt_2604_may18</code>.
-        </p>
+      <!-- Footer audit -->
+      <footer class="mt-12 pt-6 border-t border-slate-200 text-xs text-slate-500">
+        Finalized by Danielle Goldberg on May 22, 2026 at 10:42 AM ET. Report ID
+        <code class="px-1 bg-slate-100 rounded">rpt_2604_may18</code>. AI summary
+        and metric snapshots locked at finalization.
       </footer>
     </main>
+
+    <script>
+      document.querySelectorAll(".row-toggle").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          btn.parentElement.classList.toggle("open");
+        });
+      });
+    </script>
   </body>
 </html>
