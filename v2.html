@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Awards & Insights · v2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+      }
+      .serif {
+        font-family: "Source Serif 4", Georgia, serif;
+      }
+      [data-expand]:not(.open) .row-detail {
+        display: none;
+      }
+      [data-expand].open .chevron {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Top bar -->
+    <header
+      class="border-b border-slate-200 px-8 py-4 flex items-center justify-between"
+    >
+      <nav class="flex items-center gap-2 text-sm text-slate-500">
+        <a href="./index.html" class="hover:text-slate-900">⌂</a>
+        <span class="text-slate-300">›</span>
+        <span>CSRs</span>
+        <span class="text-slate-300">›</span>
+        <span class="text-violet-600 font-medium"
+          >Calculate Payout · May 18 - May 24</span
+        >
+      </nav>
+      <button class="text-sm text-slate-600 hover:text-slate-900">
+        Save & Exit
+      </button>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-8 py-10">
+      <!-- Step indicator -->
+      <div class="flex items-center justify-center gap-4">
+        <div class="flex items-center gap-2">
+          <div
+            class="h-7 w-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-semibold"
+          >
+            ✓
+          </div>
+          <span class="text-sm font-semibold text-slate-900">Enter Results</span>
+        </div>
+        <div class="h-px w-16 bg-slate-300"></div>
+        <div class="flex items-center gap-2">
+          <div
+            class="h-7 w-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-semibold"
+          >
+            2
+          </div>
+          <span class="text-sm font-semibold text-slate-900"
+            >Awards & Insights</span
+          >
+        </div>
+        <div class="h-px w-16 bg-slate-300"></div>
+        <div class="flex items-center gap-2">
+          <div
+            class="h-7 w-7 rounded-full border border-slate-300 text-slate-400 flex items-center justify-center text-xs font-semibold"
+          >
+            3
+          </div>
+          <span class="text-sm text-slate-400">Finalize & Notify</span>
+        </div>
+      </div>
+
+      <!-- Heading -->
+      <div class="mt-10">
+        <h1 class="text-3xl serif text-slate-900">Review award breakdown</h1>
+        <p class="mt-2 text-slate-600">
+          Here&apos;s what each team member earned this period. Click any row to
+          see the formula detail.
+        </p>
+      </div>
+
+      <!-- 4 summary tiles -->
+      <section class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <p class="text-xs font-medium text-slate-500">Pay period</p>
+          <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
+            May 18-24
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <p class="text-xs font-medium text-slate-500">Participants</p>
+          <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
+            3
+          </p>
+        </div>
+        <div
+          class="rounded-xl border border-emerald-100 bg-emerald-50/40 p-5"
+        >
+          <p class="text-xs font-medium text-emerald-700">Total payout</p>
+          <p class="mt-2 text-2xl font-semibold tracking-tight text-emerald-700">
+            $1,253
+          </p>
+          <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
+            <span>↗</span>
+            <span class="font-medium">+9%</span>
+            <span class="text-slate-400 ml-1">vs $1,148 prior</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <p class="text-xs font-medium text-slate-500">Avg. award</p>
+          <p class="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
+            $418
+          </p>
+          <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
+            <span>↗</span>
+            <span class="font-medium">+9%</span>
+            <span class="text-slate-400 ml-1">vs $383 prior</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI insight card -->
+      <section
+        class="mt-6 rounded-xl border border-violet-200 bg-gradient-to-br from-violet-50/60 to-white p-6"
+      >
+        <div class="flex items-start gap-3">
+          <div
+            class="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-100 shrink-0"
+          >
+            <svg
+              class="h-4 w-4 text-violet-700"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l1.5 4.5L19 9l-4.5 1.5L13 15l-1.5-4.5L7 9l4.5-1.5L13 3z"
+              />
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span
+                class="text-[10px] font-semibold uppercase tracking-wider text-violet-700"
+                >AI Insight</span
+              >
+              <span class="text-[10px] text-slate-400"
+                >Generated from this period&apos;s data</span
+              >
+            </div>
+            <h3 class="mt-1 text-base font-semibold text-slate-900">
+              Payout is up 9% — quality + conversion drove it.
+            </h3>
+            <ul class="mt-3 space-y-2">
+              <li class="flex items-start gap-2 text-sm text-slate-700">
+                <span>📈</span>
+                <span
+                  >Total payout up $105 (9%) vs last week, driven by a 34-call
+                  jump in volume and 4 percentage-point lift in booking
+                  conversion.</span
+                >
+              </li>
+              <li class="flex items-start gap-2 text-sm text-slate-700">
+                <span>⭐</span>
+                <span
+                  >5★ reviews and memberships both grew sharply — 14 reviews
+                  (+3) and 6 memberships (+3), adding ~$2,320 in estimated
+                  downstream value.</span
+                >
+              </li>
+              <li class="flex items-start gap-2 text-sm text-slate-700">
+                <span>🏆</span>
+                <span
+                  >Amber Slye outperformed on every revenue-linked metric: 128
+                  calls handled, 81% booking conversion, and 3 of the 6
+                  memberships sold.</span
+                >
+              </li>
+              <li class="flex items-start gap-2 text-sm text-slate-700">
+                <span>⚠️</span>
+                <span
+                  >First Call Resolution dipped 2pp to 84% — worth a check that
+                  volume gains aren&apos;t coming at the cost of call quality.</span
+                >
+              </li>
+            </ul>
+            <div class="mt-4 flex items-center gap-3 text-xs">
+              <button class="text-violet-700 font-medium hover:underline">
+                Regenerate
+              </button>
+              <span class="text-slate-300">·</span>
+              <button class="text-slate-500 hover:text-slate-700">
+                Copy for Slack
+              </button>
+              <span class="text-slate-300">·</span>
+              <button class="text-slate-500 hover:text-slate-700">
+                Email to leadership
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Per-metric aggregate widgets -->
+      <section class="mt-10">
+        <div class="mb-4">
+          <h2 class="text-lg font-semibold text-slate-900">
+            Metrics this period
+          </h2>
+          <p class="text-sm text-slate-500">
+            Aggregate across all 3 participants vs prior period.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
+          <!-- Calls Handled -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs font-medium text-slate-500">Calls Handled</p>
+            <div class="mt-1 flex items-baseline gap-2">
+              <p class="text-xl font-semibold text-slate-900 tracking-tight">
+                342
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-slate-400"
+                >Team total</span
+              >
+            </div>
+            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
+              <span>↗</span>
+              <span class="font-medium">+34 calls</span>
+              <span class="text-slate-400 ml-1">vs 308 prior</span>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100">
+              <p class="text-[11px] text-slate-500">
+                <span
+                  class="inline-block h-4 w-4 mr-1 rounded-full bg-blue-100 text-blue-700 text-[9px] font-semibold leading-4 text-center align-middle"
+                  >AS</span
+                >
+                <span class="font-medium text-slate-700">Amber Slye</span> led
+                with 128
+              </p>
+            </div>
+          </div>
+
+          <!-- Booking Conversion -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs font-medium text-slate-500">Booking Conversion</p>
+            <div class="mt-1 flex items-baseline gap-2">
+              <p class="text-xl font-semibold text-slate-900 tracking-tight">
+                72%
+              </p>
+              <span class="text-[10px] uppercase tracking-wider text-slate-400"
+                >Team avg</span
+              >
+            </div>
+            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
+              <span>↗</span>
+              <span class="font-medium">+4.0 pp</span>
+              <span class="text-slate-400 ml-1">vs 68% prior</span>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100">
+              <p class="text-[11px] text-slate-500">
+                <span
+                  class="inline-block h-4 w-4 mr-1 rounded-full bg-blue-100 text-blue-700 text-[9px] font-semibold leading-4 text-center align-middle"
+                  >AS</span
+                >
+                <span class="font-medium text-slate-700">Amber Slye</span> led
+                with 81%
+              </p>
+            </div>
+          </div>
+
+          <!-- 5★ Reviews -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs font-medium text-slate-500">5★ Reviews</p>
+            <div class="mt-1 flex items-baseline gap-2">
+              <p class="text-xl font-semibold text-slate-900 tracking-tight">
+                14
+              </p>
+              <span class="text-[10px] uppercase tracking-wider text-slate-400"
+                >Team total</span
+              >
+            </div>
+            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
+              <span>↗</span>
+              <span class="font-medium">+3 reviews</span>
+              <span class="text-slate-400 ml-1">vs 11 prior</span>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100">
+              <p class="text-[11px] text-slate-500">
+                <span class="text-amber-700 font-semibold">~$1,120</span>
+                estimated value — avg revenue from review-driven leads
+              </p>
+            </div>
+          </div>
+
+          <!-- Memberships -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs font-medium text-slate-500">Memberships Sold</p>
+            <div class="mt-1 flex items-baseline gap-2">
+              <p class="text-xl font-semibold text-slate-900 tracking-tight">
+                6
+              </p>
+              <span class="text-[10px] uppercase tracking-wider text-slate-400"
+                >Team total</span
+              >
+            </div>
+            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
+              <span>↗</span>
+              <span class="font-medium">+3 memberships</span>
+              <span class="text-slate-400 ml-1">vs 3 prior</span>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 space-y-1">
+              <p class="text-[11px] text-slate-500">
+                <span class="text-amber-700 font-semibold">~$1,200</span>
+                estimated value — est. annual revenue per membership
+              </p>
+              <p class="text-[11px] text-slate-500">
+                <span
+                  class="inline-block h-4 w-4 mr-1 rounded-full bg-blue-100 text-blue-700 text-[9px] font-semibold leading-4 text-center align-middle"
+                  >AS</span
+                >
+                <span class="font-medium text-slate-700">Amber Slye</span> led
+                with 3
+              </p>
+            </div>
+          </div>
+
+          <!-- First Call Resolution -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs font-medium text-slate-500">
+              First Call Resolution
+            </p>
+            <div class="mt-1 flex items-baseline gap-2">
+              <p class="text-xl font-semibold text-slate-900 tracking-tight">
+                84%
+              </p>
+              <span class="text-[10px] uppercase tracking-wider text-slate-400"
+                >Team avg</span
+              >
+            </div>
+            <div class="mt-1 flex items-center gap-1 text-xs text-rose-700">
+              <span>↘</span>
+              <span class="font-medium">-2.0 pp</span>
+              <span class="text-slate-400 ml-1">vs 86% prior</span>
+            </div>
+          </div>
+
+          <!-- Callbacks -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs font-medium text-slate-500">Callbacks</p>
+            <div class="mt-1 flex items-baseline gap-2">
+              <p class="text-xl font-semibold text-slate-900 tracking-tight">
+                4
+              </p>
+              <span class="text-[10px] uppercase tracking-wider text-slate-400"
+                >Team total</span
+              >
+            </div>
+            <div class="mt-1 flex items-center gap-1 text-xs text-emerald-700">
+              <span>↘</span>
+              <span class="font-medium">-3 callbacks</span>
+              <span class="text-slate-400 ml-1">vs 7 prior (lower = better)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Employee breakdown -->
+      <section class="mt-10">
+        <div class="flex items-baseline justify-between mb-3">
+          <h2 class="text-lg font-semibold text-slate-900">Employee awards</h2>
+          <button
+            id="expand-all"
+            class="text-sm text-violet-600 hover:text-violet-700 underline"
+          >
+            Expand all
+          </button>
+        </div>
+        <div class="space-y-2" id="employee-list">
+          <!-- Amber -->
+          <div
+            data-expand
+            class="rounded-lg border border-slate-200 bg-white"
+          >
+            <button
+              class="row-toggle w-full px-5 py-4 flex items-center justify-between hover:bg-slate-50 rounded-lg transition"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
+                >
+                  AS
+                </div>
+                <span class="text-sm font-semibold text-slate-900"
+                  >Amber Slye</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="text-right">
+                  <p class="text-lg font-semibold text-emerald-700">$512</p>
+                  <div
+                    class="flex items-center justify-end gap-1 text-[11px] text-emerald-700"
+                  >
+                    <span>↗</span><span>+16% vs prior</span>
+                  </div>
+                </div>
+                <span class="chevron text-slate-400 transition-transform">▾</span>
+              </div>
+            </button>
+            <div
+              class="row-detail border-t border-slate-100 px-5 py-4 text-sm text-slate-600 bg-slate-50/50"
+            >
+              <p class="italic text-slate-500">
+                Per-rule breakdown would render here (mirrors existing review row
+                UI — outside the scope of this prototype).
+              </p>
+            </div>
+          </div>
+
+          <!-- Carli -->
+          <div
+            data-expand
+            class="rounded-lg border border-slate-200 bg-white"
+          >
+            <button
+              class="row-toggle w-full px-5 py-4 flex items-center justify-between hover:bg-slate-50 rounded-lg transition"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
+                >
+                  CW
+                </div>
+                <span class="text-sm font-semibold text-slate-900"
+                  >Carli Waits</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="text-right">
+                  <p class="text-lg font-semibold text-emerald-700">$401</p>
+                  <div
+                    class="flex items-center justify-end gap-1 text-[11px] text-emerald-700"
+                  >
+                    <span>↗</span><span>+3% vs prior</span>
+                  </div>
+                </div>
+                <span class="chevron text-slate-400 transition-transform">▾</span>
+              </div>
+            </button>
+            <div
+              class="row-detail border-t border-slate-100 px-5 py-4 text-sm text-slate-600 bg-slate-50/50"
+            >
+              <p class="italic text-slate-500">
+                Per-rule breakdown would render here.
+              </p>
+            </div>
+          </div>
+
+          <!-- Jordyn -->
+          <div
+            data-expand
+            class="rounded-lg border border-slate-200 bg-white"
+          >
+            <button
+              class="row-toggle w-full px-5 py-4 flex items-center justify-between hover:bg-slate-50 rounded-lg transition"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-semibold"
+                >
+                  JM
+                </div>
+                <span class="text-sm font-semibold text-slate-900"
+                  >Jordyn Martsching</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="text-right">
+                  <p class="text-lg font-semibold text-emerald-700">$340</p>
+                  <div
+                    class="flex items-center justify-end gap-1 text-[11px] text-emerald-700"
+                  >
+                    <span>↗</span><span>+7% vs prior</span>
+                  </div>
+                </div>
+                <span class="chevron text-slate-400 transition-transform">▾</span>
+              </div>
+            </button>
+            <div
+              class="row-detail border-t border-slate-100 px-5 py-4 text-sm text-slate-600 bg-slate-50/50"
+            >
+              <p class="italic text-slate-500">
+                Per-rule breakdown would render here.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total payout footer -->
+        <div
+          class="mt-4 rounded-lg bg-slate-50 px-5 py-4 flex items-center justify-between"
+        >
+          <div>
+            <p class="text-xs text-slate-500">3 employees · CSRs · May 18-24</p>
+            <p class="text-sm font-semibold text-slate-900 mt-0.5">
+              Total payout this period
+            </p>
+          </div>
+          <p class="text-2xl font-semibold text-emerald-700">$1,253</p>
+        </div>
+      </section>
+
+      <!-- Footer actions -->
+      <div
+        class="mt-10 flex items-center justify-between border-t border-slate-200 pt-6"
+      >
+        <button
+          class="text-sm font-medium text-slate-600 hover:text-slate-900"
+        >
+          ← Back to Enter Results
+        </button>
+        <button
+          class="text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-5 py-2 rounded-md"
+        >
+          Continue to Finalize & Notify →
+        </button>
+      </div>
+    </main>
+
+    <script>
+      document.querySelectorAll(".row-toggle").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          btn.parentElement.classList.toggle("open");
+        });
+      });
+      const expandAll = document.getElementById("expand-all");
+      let allOpen = false;
+      expandAll.addEventListener("click", () => {
+        allOpen = !allOpen;
+        document.querySelectorAll("[data-expand]").forEach((el) => {
+          el.classList.toggle("open", allOpen);
+        });
+        expandAll.textContent = allOpen ? "Collapse all" : "Expand all";
+      });
+    </script>
+  </body>
+</html>

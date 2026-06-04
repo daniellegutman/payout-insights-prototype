@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payout Insights · v1 (Adaptive ROI)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 min-h-screen">
+    <div class="mx-auto max-w-5xl px-8 py-10 space-y-10">
+      <!-- Header -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 text-xs text-slate-500">
+          <span class="flex items-center gap-1.5">
+            <span class="text-emerald-500">✓</span> Thresholds
+          </span>
+          <span class="text-slate-300">→</span>
+          <span class="flex items-center gap-1.5">
+            <span class="text-emerald-500">✓</span> Review
+          </span>
+          <span class="text-slate-300">→</span>
+          <span
+            class="flex items-center gap-1.5 rounded-md bg-violet-100 px-2 py-0.5 text-violet-700 font-medium"
+            >✨ Insights</span
+          >
+          <span class="text-slate-300">→</span>
+          <span class="text-slate-400">Confirm</span>
+        </div>
+        <div class="flex items-start justify-between gap-6">
+          <div>
+            <div
+              class="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-violet-700"
+            >
+              ✨ Payout Insights
+            </div>
+            <h1
+              class="mt-2 text-3xl font-semibold text-slate-900 tracking-tight"
+            >
+              Did this payout deliver?
+            </h1>
+            <p class="mt-1 text-slate-600 max-w-xl">
+              Each rule is rendered with the strongest ROI framing its metric
+              supports — falling through a waterfall when revenue data
+              isn&apos;t available.
+            </p>
+            <p class="mt-2 text-xs text-slate-400">
+              <a href="./index.html" class="hover:text-violet-700">← All prototypes</a>
+            </p>
+          </div>
+          <div
+            class="flex gap-1 rounded-lg border border-slate-200 bg-white p-1 shrink-0 flex-wrap"
+            id="plan-switcher"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Adaptive hero -->
+      <div id="hero"></div>
+
+      <!-- Plan rollups -->
+      <section>
+        <div class="mb-4">
+          <div
+            class="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-500"
+          >
+            📈 Plan performance
+          </div>
+          <h2
+            class="mt-1 text-lg font-semibold text-slate-900 tracking-tight"
+          >
+            What moved this period
+          </h2>
+          <p class="mt-0.5 text-sm text-slate-500">
+            Computed from performance rules only. Base pay (regular & overtime
+            hours) is excluded.
+          </p>
+        </div>
+        <div
+          id="rollups"
+          class="grid grid-cols-1 sm:grid-cols-3 gap-4"
+        ></div>
+      </section>
+
+      <!-- Per-rule insights -->
+      <section>
+        <div class="mb-4">
+          <div
+            class="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-500"
+          >
+            🪙 By rule
+          </div>
+          <h2 class="mt-1 text-lg font-semibold text-slate-900 tracking-tight">
+            What each rule did
+          </h2>
+          <p class="mt-0.5 text-sm text-slate-500">
+            Each card uses the strongest ROI tier its metric supports (badge in
+            top-right).
+          </p>
+        </div>
+        <div id="rules" class="space-y-3"></div>
+      </section>
+
+      <!-- Cost of labor -->
+      <section id="cost-of-labor"></section>
+
+      <!-- Verdict -->
+      <section id="verdict"></section>
+
+      <!-- Footer -->
+      <div
+        class="flex items-center justify-between border-t border-slate-200 pt-6"
+      >
+        <button class="text-sm font-medium text-slate-600 hover:text-slate-900">
+          ← Back to Review
+        </button>
+        <button
+          id="confirm-btn"
+          class="text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-5 py-2 rounded-md"
+        ></button>
+      </div>
+    </div>
+
+    <script>
+      // ───────────────────────────────────────────────────────────────
+      // Mock data — four plans exercising the three hero states
+      // ───────────────────────────────────────────────────────────────
+      const PLANS = [
+        {
+          planId: "plan-a",
+          planName: "Performance Pay Effective Hourly",
+          period: "Apr 5–11",
+          employee: { name: "Danielle Goldberg", role: "Analyst", initials: "DG" },
+          totalPayout: 1843,
+          basePay: 1330,
+          performancePay: 1816,
+          prior: { performancePay: 1485, revenueGenerated: 14200 },
+          current: { revenueGenerated: 16000 },
+          rules: [
+            { id: "reg-a", label: "Regular Hours", category: "base_pay", isBasePay: true, formula: "40 hrs × $28/hr", payout: 1120, current: 40, previous: 38, unitLabel: "hrs", format: "dollar", aggregation: "summed" },
+            { id: "ot-a", label: "Overtime Hours", category: "base_pay", isBasePay: true, formula: "5 hrs × $28/hr × 1.5x", payout: 210, current: 5, previous: 7, unitLabel: "hrs", format: "dollar", aggregation: "summed" },
+            { id: "compl-a", label: "Completed By", category: "commission", format: "dollar", aggregation: "summed", payout: 576, current: 6000, previous: 5100, unitLabel: "$", valueGenerated: 6000 },
+            { id: "sold-a", label: "Sold By", category: "commission", format: "dollar", aggregation: "summed", payout: 1200, current: 10000, previous: 8400, unitLabel: "$", valueGenerated: 10000 },
+            { id: "star-a", label: "5 Star Reviews", category: "piece_rate", format: "integer", aggregation: "summed", payout: 20, current: 2, previous: 1, unitLabel: "reviews" },
+            { id: "mem-a", label: "Memberships", category: "piece_rate", format: "integer", aggregation: "summed", payout: 20, current: 1, previous: 0, unitLabel: "memberships" },
+          ],
+        },
+        {
+          planId: "plan-b",
+          planName: "Hourly + Incentives OT",
+          period: "Apr 5–11",
+          employee: { name: "Kate McCarthy", role: "Analyst", initials: "KM" },
+          totalPayout: 1260,
+          basePay: 1075,
+          performancePay: 185,
+          prior: { performancePay: 145, revenueGenerated: 6200 },
+          current: { revenueGenerated: 7000 },
+          rules: [
+            { id: "reg-b", label: "Reg Hours", category: "base_pay", isBasePay: true, formula: "40 hrs × $25/hr", payout: 1000, current: 40, previous: 40, unitLabel: "hrs", format: "dollar", aggregation: "summed" },
+            { id: "ot-b", label: "OT Hours", category: "base_pay", isBasePay: true, formula: "2 hrs × $25/hr × 1.5x", payout: 75, current: 2, previous: 4, unitLabel: "hrs", format: "dollar", aggregation: "summed" },
+            { id: "rev-b", label: "Completed Revenue", category: "tier", format: "dollar", aggregation: "summed", payout: 140, current: 7000, previous: 6200, unitLabel: "$", valueGenerated: 7000, tierRange: { min: 6000, max: 8000 } },
+            { id: "tkt-b", label: "Average Ticket", category: "tier", format: "dollar", aggregation: "averaging", payout: 25, current: 750, previous: 690, unitLabel: "$", tierRange: { min: 650, max: 800 } },
+            { id: "mem-b", label: "Memberships", category: "piece_rate", format: "integer", aggregation: "summed", payout: 10, current: 1, previous: 0, unitLabel: "memberships" },
+            { id: "star-b", label: "5 Star Reviews", category: "piece_rate", format: "integer", aggregation: "summed", payout: 10, current: 2, previous: 3, unitLabel: "reviews" },
+          ],
+        },
+        {
+          planId: "plan-c",
+          planName: "Service Quality Bonus",
+          period: "Apr 5–11",
+          employee: { name: "Marcus Chen", role: "Service Tech", initials: "MC" },
+          totalPayout: 2225,
+          basePay: 1335,
+          performancePay: 890,
+          prior: { performancePay: 620, revenueGenerated: 0 },
+          current: { revenueGenerated: 0 },
+          rules: [
+            { id: "reg-c", label: "Regular Hours", category: "base_pay", isBasePay: true, formula: "40 hrs × $30/hr", payout: 1200, current: 40, previous: 40, unitLabel: "hrs", format: "dollar", aggregation: "summed" },
+            { id: "ot-c", label: "Overtime Hours", category: "base_pay", isBasePay: true, formula: "3 hrs × $30/hr × 1.5x", payout: 135, current: 3, previous: 5, unitLabel: "hrs", format: "dollar", aggregation: "summed" },
+            { id: "star-c", label: "5 Star Reviews", category: "piece_rate", format: "integer", aggregation: "summed", payout: 150, current: 6, previous: 4, unitLabel: "reviews", valuePerUnit: 80, valuePerUnitNote: "Avg revenue from review-driven leads" },
+            { id: "cb-c", label: "Callbacks Avoided", category: "piece_rate", format: "integer", aggregation: "summed", payout: 240, current: 12, previous: 8, unitLabel: "callbacks", valuePerUnit: 150, valuePerUnitNote: "Avg cost of one truck-roll callback" },
+            { id: "csat-c", label: "CSAT Score", category: "tier", format: "percent", aggregation: "averaging", payout: 200, current: 92, previous: 89.5, unitLabel: "%", tierRange: { min: 88, max: 95 } },
+            { id: "safe-c", label: "Safety Incidents", category: "all_or_nothing", format: "integer", aggregation: "summed", payout: 300, current: 1, previous: 0, unitLabel: "passed", target: 0 },
+          ],
+        },
+        {
+          planId: "plan-d",
+          planName: "Safety & Recognition",
+          period: "Apr 5–11",
+          employee: { name: "Priya Patel", role: "Ops Lead", initials: "PP" },
+          totalPayout: 1510,
+          basePay: 1040,
+          performancePay: 470,
+          prior: { performancePay: 270, revenueGenerated: 0, performanceIndex: 71 },
+          current: { revenueGenerated: 0, performanceIndex: 80 },
+          rules: [
+            { id: "reg-d", label: "Regular Hours", category: "base_pay", isBasePay: true, formula: "40 hrs × $26/hr", payout: 1040, current: 40, previous: 40, unitLabel: "hrs", format: "dollar", aggregation: "summed" },
+            { id: "att-d", label: "Perfect Attendance", category: "all_or_nothing", format: "integer", aggregation: "summed", payout: 100, current: 1, previous: 1, unitLabel: "passed", target: 1 },
+            { id: "obs-d", label: "Safety Observations Logged", category: "piece_rate", format: "integer", aggregation: "summed", payout: 120, current: 8, previous: 5, unitLabel: "observations", target: 6 },
+            { id: "trn-d", label: "Training Hours Completed", category: "piece_rate", format: "integer", aggregation: "summed", payout: 100, current: 4, previous: 2, unitLabel: "hrs", target: 4 },
+            { id: "csat-d", label: "Team CSAT", category: "tier", format: "percent", aggregation: "averaging", payout: 150, current: 86, previous: 82, unitLabel: "%", tierRange: { min: 80, max: 90 } },
+          ],
+        },
+      ];
+
+      // ───────────────────────────────────────────────────────────────
+      // Helpers (mirror lib/insights.ts)
+      // ───────────────────────────────────────────────────────────────
+      const fmtDollar = (n) =>
+        "$" + Math.round(n).toLocaleString();
+      const fmtValue = (r, n) =>
+        r.format === "dollar"
+          ? fmtDollar(n)
+          : r.format === "percent"
+            ? `${n.toFixed(1)}%`
+            : `${Math.round(n)} ${r.unitLabel}`;
+      const deltaPct = (cur, prev) =>
+        prev === 0 ? (cur === 0 ? 0 : 100) : ((cur - prev) / prev) * 100;
+      const tone = (d, invert = false) => {
+        if (Math.abs(d) < 1) return "neutral";
+        const pos = invert ? d < 0 : d > 0;
+        return pos ? "positive" : "negative";
+      };
+      const toneClasses = {
+        positive: "text-emerald-700 bg-emerald-50 border-emerald-200",
+        negative: "text-rose-700 bg-rose-50 border-rose-200",
+        neutral: "text-slate-700 bg-slate-100 border-slate-200",
+      };
+      const toneBar = {
+        positive: "bg-emerald-500",
+        negative: "bg-rose-500",
+        neutral: "bg-slate-400",
+      };
+      const tierClasses = {
+        1: "bg-emerald-100 text-emerald-800",
+        2: "bg-amber-100 text-amber-800",
+        3: "bg-sky-100 text-sky-800",
+        4: "bg-indigo-100 text-indigo-800",
+        5: "bg-slate-200 text-slate-700",
+      };
+      const tierLabel = {
+        1: "Direct ROI",
+        2: "Admin-estimated",
+        3: "Proxy",
+        4: "Proxy",
+        5: "Improvement only",
+      };
+      const arrow = (t) =>
+        t === "positive" ? "↗" : t === "negative" ? "↘" : "—";
+
+      // Tier picker
+      function pickCostFraming(r) {
+        if (r.valueGenerated && r.payout) {
+          const pct = (r.payout / r.valueGenerated) * 100;
+          return {
+            label: "Payout-to-revenue",
+            value: `${pct.toFixed(1)}% (${fmtDollar(r.payout)} on ${fmtDollar(r.valueGenerated)})`,
+            tier: 1,
+          };
+        }
+        if (r.valuePerUnit && r.current > 0) {
+          const v = r.valuePerUnit * r.current;
+          const pct = (r.payout / v) * 100;
+          return {
+            label: "Est. payout-to-value",
+            value: `${pct.toFixed(1)}% (${fmtDollar(r.payout)} on ~${fmtDollar(v)} est.)`,
+            tier: 2,
+            note: r.valuePerUnitNote,
+          };
+        }
+        if ((r.category === "piece_rate" || r.format === "integer") && r.current > 0) {
+          const per = r.payout / r.current;
+          const singular = r.unitLabel.endsWith("s") ? r.unitLabel.slice(0, -1) : r.unitLabel;
+          return {
+            label: `Cost per ${singular}`,
+            value: `${fmtDollar(per)} (${fmtDollar(r.payout)} ÷ ${r.current})`,
+            tier: 3,
+          };
+        }
+        if (r.target !== undefined && r.target > 0) {
+          const pct = (r.current / r.target) * 100;
+          return {
+            label: "Achievement vs target",
+            value: `${pct.toFixed(0)}% of ${fmtValue(r, r.target)} target`,
+            tier: 4,
+          };
+        }
+        return {
+          label: "Change for",
+          value: `${fmtDollar(r.payout)} to move ${fmtValue(r, r.previous)} → ${fmtValue(r, r.current)}`,
+          tier: 5,
+        };
+      }
+
+      function pickHeroState(plan) {
+        const perf = plan.rules.filter((r) => !r.isBasePay);
+        if (perf.some((r) => r.valueGenerated > 0)) return "revenue";
+        if (perf.some((r) => r.valuePerUnit > 0)) return "imputed";
+        return "improvement";
+      }
+
+      function sumImputed(plan, useCurrent) {
+        return plan.rules
+          .filter((r) => !r.isBasePay && r.valuePerUnit)
+          .reduce((a, r) => a + r.valuePerUnit * (useCurrent ? r.current : r.previous), 0);
+      }
+
+      // ───────────────────────────────────────────────────────────────
+      // Renderers
+      // ───────────────────────────────────────────────────────────────
+      let currentIdx = 0;
+
+      function renderSwitcher() {
+        const el = document.getElementById("plan-switcher");
+        el.innerHTML = PLANS.map((p, i) => {
+          const heroLabel =
+            pickHeroState(p) === "revenue"
+              ? "Direct"
+              : pickHeroState(p) === "imputed"
+                ? "Imputed"
+                : "Improvement";
+          const cls =
+            i === currentIdx
+              ? "bg-slate-900 text-white"
+              : "text-slate-600 hover:bg-slate-100";
+          return `<button onclick="select(${i})" class="px-3 py-1.5 rounded-md text-xs font-medium transition whitespace-nowrap ${cls}" title="${p.planName}">${p.employee.initials} · ${heroLabel}</button>`;
+        }).join("");
+      }
+
+      function renderHero(plan) {
+        const hero = pickHeroState(plan);
+        const employee = plan.employee;
+        const heroBadge = {
+          revenue: { label: "Direct ROI", cls: tierClasses[1] },
+          imputed: { label: "Imputed value", cls: tierClasses[2] },
+          improvement: { label: "Improvement only", cls: tierClasses[5] },
+        }[hero];
+
+        let body = "";
+        if (hero === "revenue") {
+          const rev = plan.current.revenueGenerated;
+          const dpd = (rev / plan.performancePay).toFixed(2);
+          const ratioCurr = (plan.performancePay / rev) * 100;
+          const ratioPrev = (plan.prior.performancePay / plan.prior.revenueGenerated) * 100;
+          const ratioDelta = ratioCurr - ratioPrev;
+          const t = ratioDelta < -0.5 ? "positive" : ratioDelta > 0.5 ? "negative" : "neutral";
+          const eff = t === "positive" ? "More efficient" : t === "negative" ? "Less efficient" : "Steady";
+          body = `
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-end">
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Performance pay</p>
+                <p class="mt-1 text-3xl font-semibold tracking-tight text-violet-700">${fmtDollar(plan.performancePay)}</p>
+              </div>
+              <div class="flex items-center justify-center text-slate-400 sm:-translate-y-3 text-2xl">→</div>
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Revenue generated</p>
+                <p class="mt-1 text-3xl font-semibold tracking-tight text-emerald-700">${fmtDollar(rev)}</p>
+              </div>
+            </div>
+            <div class="mt-6 flex items-center gap-3 pt-6 border-t border-slate-200">
+              <span class="text-slate-500 shrink-0">🎯</span>
+              <p class="text-sm text-slate-700">
+                For every <strong>$1.00</strong> paid, <strong class="text-emerald-700">$${dpd}</strong> in revenue was generated.
+                <span class="inline-flex items-center gap-1 ml-1 rounded-md border px-1.5 py-0.5 text-xs font-medium ${toneClasses[t]}">${arrow(t)} ${eff} vs prior period</span>
+              </p>
+            </div>`;
+        } else if (hero === "imputed") {
+          const cur = sumImputed(plan, true);
+          const prev = sumImputed(plan, false);
+          const dpd = (cur / plan.performancePay).toFixed(2);
+          const priorDpd = prev > 0 ? prev / plan.prior.performancePay : 0;
+          const better = cur / plan.performancePay > priorDpd;
+          body = `
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-end">
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Performance pay</p>
+                <p class="mt-1 text-3xl font-semibold tracking-tight text-violet-700">${fmtDollar(plan.performancePay)}</p>
+              </div>
+              <div class="flex items-center justify-center text-slate-400 sm:-translate-y-3 text-2xl">→</div>
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Estimated value</p>
+                <p class="mt-1 text-3xl font-semibold tracking-tight text-amber-700">~${fmtDollar(cur)}</p>
+                <p class="text-[11px] text-slate-500 mt-1">from admin-set $/unit</p>
+              </div>
+            </div>
+            <div class="mt-6 flex items-start gap-3 pt-6 border-t border-slate-200">
+              <span class="text-amber-600 shrink-0 mt-0.5">ℹ️</span>
+              <p class="text-sm text-slate-700">
+                For every <strong>$1.00</strong> paid, this plan generated an estimated <strong class="text-amber-700">$${dpd}</strong> in business value.
+                <span class="inline-flex items-center gap-1 ml-1 rounded-md border px-1.5 py-0.5 text-xs font-medium ${better ? toneClasses.positive : toneClasses.neutral}">${arrow(better ? "positive" : "neutral")} ${better ? "Higher than" : "In line with"} prior period</span>
+                <span class="block text-xs text-slate-500 mt-1.5">Value figures come from admin-set $/unit on each metric — treat as estimates, not booked revenue.</span>
+              </p>
+            </div>`;
+        } else {
+          const cur = plan.current.performanceIndex ?? 0;
+          const prev = plan.prior.performanceIndex ?? 0;
+          const moved = cur - prev;
+          const perPoint = moved > 0 ? plan.performancePay / moved : 0;
+          body = `
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-end">
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Performance pay</p>
+                <p class="mt-1 text-3xl font-semibold tracking-tight text-violet-700">${fmtDollar(plan.performancePay)}</p>
+              </div>
+              <div class="flex items-center justify-center text-slate-400 sm:-translate-y-3 text-2xl">→</div>
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Performance Index</p>
+                <p class="mt-1 text-3xl font-semibold tracking-tight text-slate-800">${prev} <span class="text-slate-400 mx-1">→</span> <span class="text-slate-900">${cur}</span></p>
+                <p class="text-[11px] text-slate-500 mt-1">weighted achievement, 0–100</p>
+              </div>
+            </div>
+            <div class="mt-6 flex items-start gap-3 pt-6 border-t border-slate-200">
+              <span class="text-slate-500 shrink-0 mt-0.5">📊</span>
+              <p class="text-sm text-slate-700">
+                You paid <strong>${fmtDollar(plan.performancePay)}</strong> to move the performance index <strong class="text-emerald-700">+${moved} points</strong> — about <strong>${fmtDollar(perPoint)}</strong> per point.
+                <span class="block text-xs text-slate-500 mt-1.5">This plan has no revenue-linked metrics. The index is a composite of each rule&apos;s achievement vs target, weighted.</span>
+              </p>
+            </div>`;
+        }
+
+        document.getElementById("hero").innerHTML = `
+          <div class="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-violet-50/40 p-8">
+            <div class="flex items-center justify-between gap-4 mb-6">
+              <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-700 font-semibold text-sm">${employee.initials}</div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-900">${employee.name}</p>
+                  <p class="text-xs text-slate-500">${plan.planName} · ${plan.period}</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[10px] font-semibold uppercase tracking-wider ${heroBadge.cls}">${heroBadge.label}</span>
+            </div>
+            ${body}
+          </div>`;
+      }
+
+      function renderRollups(plan) {
+        const hero = pickHeroState(plan);
+        const perfDelta = deltaPct(plan.performancePay, plan.prior.performancePay);
+        const tiles = [];
+
+        tiles.push({
+          label: "Performance pay",
+          value: fmtDollar(plan.performancePay),
+          delta: perfDelta,
+          previous: `${fmtDollar(plan.prior.performancePay)} prior`,
+          unit: "%",
+        });
+
+        if (hero === "revenue") {
+          const revDelta = deltaPct(plan.current.revenueGenerated, plan.prior.revenueGenerated);
+          const ratioCurr = (plan.performancePay / plan.current.revenueGenerated) * 100;
+          const ratioPrev = (plan.prior.performancePay / plan.prior.revenueGenerated) * 100;
+          tiles.push({
+            label: "Revenue generated",
+            value: fmtDollar(plan.current.revenueGenerated),
+            delta: revDelta,
+            previous: `${fmtDollar(plan.prior.revenueGenerated)} prior`,
+            unit: "%",
+          });
+          tiles.push({
+            label: "Payout-to-revenue",
+            value: `${ratioCurr.toFixed(1)}%`,
+            delta: ratioCurr - ratioPrev,
+            previous: `${ratioPrev.toFixed(1)}% prior`,
+            unit: "pp",
+            invert: true,
+          });
+        } else if (hero === "imputed") {
+          const cur = sumImputed(plan, true);
+          const prev = sumImputed(plan, false);
+          tiles.push({
+            label: "Estimated value",
+            value: `~${fmtDollar(cur)}`,
+            delta: deltaPct(cur, prev),
+            previous: `~${fmtDollar(prev)} prior`,
+            unit: "%",
+            estimated: true,
+          });
+          const ratioCurr = (plan.performancePay / cur) * 100;
+          const ratioPrev = prev > 0 ? (plan.prior.performancePay / prev) * 100 : 0;
+          tiles.push({
+            label: "Payout-to-value",
+            value: `${ratioCurr.toFixed(1)}%`,
+            delta: ratioCurr - ratioPrev,
+            previous: `${ratioPrev.toFixed(1)}% prior`,
+            unit: "pp",
+            invert: true,
+            estimated: true,
+          });
+        } else {
+          const cur = plan.current.performanceIndex;
+          const prev = plan.prior.performanceIndex;
+          tiles.push({
+            label: "Performance Index",
+            value: `${cur}`,
+            delta: cur - prev,
+            previous: `${prev} prior`,
+            unit: "pp",
+          });
+          const perPoint = cur - prev > 0 ? plan.performancePay / (cur - prev) : 0;
+          tiles.push({
+            label: "Cost per index point",
+            value: fmtDollar(perPoint),
+            delta: 0,
+            previous: "no prior",
+            unit: "%",
+          });
+        }
+
+        document.getElementById("rollups").innerHTML = tiles
+          .map((t) => {
+            const tn = Math.abs(t.delta) < 0.5 ? "neutral" : t.invert ? (t.delta < 0 ? "positive" : "negative") : (t.delta > 0 ? "positive" : "negative");
+            const estBadge = t.estimated
+              ? `<span class="text-[9px] font-semibold uppercase tracking-wider rounded px-1.5 py-0.5 bg-amber-100 text-amber-800">Est.</span>`
+              : "";
+            const deltaStr =
+              t.unit === "pp"
+                ? `${t.delta >= 0 ? "+" : ""}${t.delta.toFixed(1)}pp`
+                : `${t.delta >= 0 ? "+" : ""}${t.delta.toFixed(0)}%`;
+            return `
+              <div class="rounded-xl border border-slate-200 bg-white p-5">
+                <div class="flex items-center justify-between">
+                  <p class="text-xs font-medium uppercase tracking-wide text-slate-500">${t.label}</p>
+                  ${estBadge}
+                </div>
+                <p class="mt-2 text-2xl font-semibold text-slate-900 tracking-tight">${t.value}</p>
+                <div class="mt-3 flex items-center gap-2">
+                  <span class="inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-xs font-medium ${toneClasses[tn]}">${arrow(tn)} ${deltaStr}</span>
+                  <span class="text-xs text-slate-500">${t.previous}</span>
+                </div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      function renderRules(plan) {
+        const perf = plan.rules.filter((r) => !r.isBasePay);
+        document.getElementById("rules").innerHTML = perf
+          .map((r) => {
+            const cf = pickCostFraming(r);
+            const dp = deltaPct(r.current, r.previous);
+            const t = tone(dp);
+            const cur = fmtValue(r, r.current);
+            const prev = fmtValue(r, r.previous);
+            const maxBar = Math.max(r.current, r.previous, 1);
+            const curPct = (r.current / maxBar) * 100;
+            const prevPct = (r.previous / maxBar) * 100;
+            const tierBadge = `<span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${tierClasses[cf.tier]}" title="Tier ${cf.tier} — ${tierLabel[cf.tier]}">T${cf.tier} · ${tierLabel[cf.tier]}</span>`;
+            const noteHtml = cf.note
+              ? `<span class="block text-[11px] text-slate-400 mt-0.5 italic">${cf.note}</span>`
+              : "";
+            return `
+              <div class="rounded-xl border border-slate-200 bg-white p-5">
+                <div class="flex items-start justify-between gap-6">
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap mb-1">
+                      <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 px-1.5 py-0.5 rounded bg-slate-100">${humanizeCategory(r.category)}</span>
+                      <span class="text-[10px] font-medium uppercase tracking-wider text-slate-400">${r.format} · ${r.aggregation}</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-slate-900">${r.label}</h3>
+                    <p class="mt-1 text-sm text-slate-600">${cur} (${dp >= 0 ? "+" : ""}${dp.toFixed(0)}%) vs prior period</p>
+                  </div>
+                  <div class="text-right shrink-0">
+                    <div class="mb-2">${tierBadge}</div>
+                    <p class="text-[10px] font-medium uppercase tracking-wider text-slate-500">Paid</p>
+                    <p class="text-lg font-semibold text-slate-900">${fmtDollar(r.payout)}</p>
+                  </div>
+                </div>
+                <div class="mt-4 space-y-2">
+                  <div class="flex items-center gap-3 text-xs">
+                    <span class="w-20 shrink-0 text-slate-500">This period</span>
+                    <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                      <div class="h-full rounded-full ${toneBar[t]}" style="width: ${curPct}%"></div>
+                    </div>
+                    <span class="w-32 text-right tabular-nums font-semibold text-slate-900">${cur}</span>
+                  </div>
+                  <div class="flex items-center gap-3 text-xs">
+                    <span class="w-20 shrink-0 text-slate-500">Prior period</span>
+                    <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                      <div class="h-full rounded-full bg-slate-400 opacity-60" style="width: ${prevPct}%"></div>
+                    </div>
+                    <span class="w-32 text-right tabular-nums text-slate-600">${prev}</span>
+                  </div>
+                </div>
+                <div class="mt-4 flex items-center justify-between flex-wrap gap-2 pt-3 border-t border-slate-100">
+                  <span class="inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs font-medium ${toneClasses[t]}">${arrow(t)} ${dp >= 0 ? "+" : ""}${dp.toFixed(0)}% vs prior</span>
+                  <div class="text-xs text-slate-600 text-right">
+                    <span class="text-slate-400">${cf.label}:</span> <span class="font-semibold text-slate-900">${cf.value}</span>
+                    ${noteHtml}
+                  </div>
+                </div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      function humanizeCategory(c) {
+        const map = { commission: "Commission", tier: "Tier", piece_rate: "Piece rate", rating: "Rating", all_or_nothing: "All-or-nothing", base_pay: "Base pay" };
+        return map[c] || c;
+      }
+
+      function renderCostOfLabor(plan) {
+        const base = plan.rules.filter((r) => r.isBasePay);
+        if (!base.length) {
+          document.getElementById("cost-of-labor").innerHTML = "";
+          return;
+        }
+        document.getElementById("cost-of-labor").innerHTML = `
+          <div class="mb-4">
+            <div class="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-500">💼 Excluded from performance</div>
+            <h2 class="mt-1 text-lg font-semibold text-slate-900 tracking-tight">Cost of labor</h2>
+            <p class="mt-0.5 text-sm text-slate-500">Reg & OT hours are needed to compute total pay but do not reflect company performance.</p>
+          </div>
+          <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-5">
+            <div class="flex items-start gap-2 mb-4 text-sm text-slate-600">
+              <span class="text-slate-400 mt-0.5">ℹ️</span>
+              <p>These rows are <strong>not</strong> included in the ROI calculations above. They are shown here so total payout reconciles with what is reported in payroll.</p>
+            </div>
+            <div class="rounded-lg bg-white border border-slate-200 divide-y divide-slate-100">
+              ${base
+                .map(
+                  (r) => `
+                <div class="flex items-center justify-between px-4 py-3 text-sm">
+                  <div>
+                    <p class="font-medium text-slate-900">${r.label}</p>
+                    <p class="text-xs text-slate-500 mt-0.5">${r.formula}</p>
+                  </div>
+                  <p class="font-semibold text-slate-900 tabular-nums">${fmtDollar(r.payout)}</p>
+                </div>`
+                )
+                .join("")}
+              <div class="flex items-center justify-between px-4 py-3 text-sm bg-slate-50">
+                <p class="font-medium text-slate-700">Total base pay</p>
+                <p class="font-semibold text-slate-900 tabular-nums">${fmtDollar(plan.basePay)}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      function renderVerdict(plan) {
+        const hero = pickHeroState(plan);
+        let title = "Steady";
+        let copy = "Plan moved roughly in sync with prior period.";
+        let t = "neutral";
+
+        if (hero === "revenue") {
+          const revD = deltaPct(plan.current.revenueGenerated, plan.prior.revenueGenerated);
+          const ratioC = (plan.performancePay / plan.current.revenueGenerated) * 100;
+          const ratioP = (plan.prior.performancePay / plan.prior.revenueGenerated) * 100;
+          if (revD > 1 && ratioC < ratioP) {
+            title = "Plan is paying off";
+            copy = `Revenue grew ${revD.toFixed(0)}% while payout-to-revenue dropped ${(ratioP - ratioC).toFixed(1)} pp.`;
+            t = "positive";
+          } else if (revD > 1) {
+            title = "Mixed signal";
+            copy = `Revenue grew ${revD.toFixed(0)}%, but payout-to-revenue ratio also rose.`;
+            t = "neutral";
+          } else {
+            title = "Cost outpacing value";
+            copy = "Performance pay outpaced revenue this period.";
+            t = "negative";
+          }
+        } else if (hero === "imputed") {
+          const cur = sumImputed(plan, true);
+          const prev = sumImputed(plan, false);
+          const d = deltaPct(cur, prev);
+          if (d > 1) {
+            title = "Estimated value rose";
+            copy = `Estimated business value rose ${d.toFixed(0)}% vs prior period — based on admin-set $/unit. Validate the unit values before treating as ROI.`;
+            t = "positive";
+          } else {
+            title = "Value held steady";
+            copy = "Estimated value held roughly flat vs prior period.";
+          }
+        } else {
+          const moved = (plan.current.performanceIndex ?? 0) - (plan.prior.performanceIndex ?? 0);
+          if (moved > 0) {
+            title = "Performance index improved";
+            copy = `Index moved +${moved} points for ${fmtDollar(plan.performancePay)}. No revenue-linked metrics on this plan — set $/unit on a metric to unlock dollar ROI.`;
+            t = "positive";
+          } else {
+            title = "No meaningful movement";
+            copy = "Performance index did not improve this period.";
+            t = "negative";
+          }
+        }
+
+        document.getElementById("verdict").innerHTML = `
+          <div class="rounded-xl border p-5 ${toneClasses[t]}">
+            <div class="flex items-start gap-3">
+              <span class="mt-0.5 shrink-0">✨</span>
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-wide">${title}</p>
+                <p class="mt-1 text-sm">${copy}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      function renderFooter(plan) {
+        document.getElementById("confirm-btn").textContent =
+          `Confirm payout of ${fmtDollar(plan.totalPayout)}`;
+      }
+
+      function select(i) {
+        currentIdx = i;
+        const plan = PLANS[i];
+        renderSwitcher();
+        renderHero(plan);
+        renderRollups(plan);
+        renderRules(plan);
+        renderCostOfLabor(plan);
+        renderVerdict(plan);
+        renderFooter(plan);
+      }
+
+      select(0);
+    </script>
+  </body>
+</html>
