@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Insight Card Library · by Rule Type × Format</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: #fafaf7;
+      }
+      .serif {
+        font-family: "Source Serif 4", Georgia, serif;
+      }
+      .num {
+        font-variant-numeric: tabular-nums;
+      }
+      .ruletype {
+        scroll-margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Top bar -->
+    <header
+      class="border-b border-slate-200 bg-white/80 backdrop-blur px-8 py-4 sticky top-0 z-10"
+    >
+      <div class="mx-auto max-w-6xl flex items-center justify-between">
+        <nav class="flex items-center gap-2 text-sm text-slate-500">
+          <a href="./index.html" class="hover:text-slate-900">⌂ Prototypes</a>
+          <span class="text-slate-300">›</span>
+          <span class="text-slate-900 font-medium">Insight Card Library</span>
+        </nav>
+        <nav class="flex items-center gap-4 text-xs text-slate-500">
+          <a href="#commission" class="hover:text-violet-700">Commission</a>
+          <a href="#rating" class="hover:text-violet-700">Rating</a>
+          <a href="#aon" class="hover:text-violet-700">All-or-Nothing</a>
+          <a href="#piece" class="hover:text-violet-700">Piece Rate</a>
+          <a href="#tiers" class="hover:text-violet-700">Tiers</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-8 py-10 pb-20">
+      <!-- Intro -->
+      <div class="max-w-2xl">
+        <p
+          class="text-[10px] font-semibold uppercase tracking-wider text-violet-700"
+        >
+          Design system · insights
+        </p>
+        <h1 class="mt-2 serif text-4xl text-slate-900">
+          Card variants for every metric in ShareWillow.
+        </h1>
+        <p class="mt-3 text-slate-600">
+          One row per rule type. Three columns: how the card renders when the
+          underlying metric is measured in <strong>dollars</strong>,
+          <strong>units</strong>, or <strong>percentages</strong>.
+        </p>
+        <div
+          class="mt-5 rounded-lg border border-amber-200 bg-amber-50/60 px-4 py-3 text-xs text-amber-900"
+        >
+          <strong>Aggregation rule:</strong> dollar and unit metrics aggregate
+          by <code class="px-1 bg-white rounded">sum</code> across participants;
+          percentage metrics aggregate by
+          <code class="px-1 bg-white rounded">average</code>.
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="mt-10 grid grid-cols-3 gap-3 text-[11px] text-slate-500">
+        <div
+          class="text-center uppercase tracking-wider px-3 py-2 rounded bg-emerald-50 border border-emerald-100 text-emerald-700"
+        >
+          Dollar · summed
+        </div>
+        <div
+          class="text-center uppercase tracking-wider px-3 py-2 rounded bg-sky-50 border border-sky-100 text-sky-700"
+        >
+          Units · summed
+        </div>
+        <div
+          class="text-center uppercase tracking-wider px-3 py-2 rounded bg-violet-50 border border-violet-100 text-violet-700"
+        >
+          Percent · averaged
+        </div>
+      </div>
+
+      <!-- ───────────────── Commission ───────────────── -->
+      <section id="commission" class="ruletype mt-14">
+        <div class="flex items-baseline justify-between mb-4">
+          <div>
+            <h2 class="serif text-3xl text-slate-900">Commission</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              Earnings calculated as a rate applied to a base value (revenue,
+              jobs, margin).
+            </p>
+          </div>
+          <span
+            class="text-[10px] uppercase tracking-wider text-slate-400 px-2 py-1 rounded bg-slate-100"
+            >calculation_type · commission</span
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- Commission · dollar -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Revenue Commission
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-emerald-700 px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-100"
+                >$ · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              $6,587<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +28%</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              $94,100 closed × 7% rate. Strongest week in the 12-week window.
+            </p>
+            <svg
+              viewBox="0 0 240 50"
+              class="mt-3 w-full h-12"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="lc-d1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0,40 L40,36 L80,32 L120,30 L160,24 L200,18 L240,8 L240,50 L0,50 Z"
+                fill="url(#lc-d1)"
+              />
+              <polyline
+                points="0,40 40,36 80,32 120,30 160,24 200,18 240,8"
+                fill="none"
+                stroke="#10b981"
+                stroke-width="2"
+              />
+              <circle cx="240" cy="8" r="2.5" fill="#10b981" />
+            </svg>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Payout-to-revenue ratio:
+              <span class="font-semibold text-slate-700">7.0%</span>
+            </p>
+          </article>
+
+          <!-- Commission · units -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Per-Unit Commission
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-sky-700 px-1.5 py-0.5 rounded bg-sky-50 border border-sky-100"
+                >units · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              $1,645<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +12%</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              47 jobs sold × $35. Volume drove the lift; rate held flat.
+            </p>
+            <div class="mt-3 grid grid-cols-3 gap-1.5">
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-1.5 text-center"
+              >
+                <p class="text-[10px] text-slate-500">Nick</p>
+                <p class="text-sm font-semibold text-slate-900 num">19</p>
+              </div>
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-1.5 text-center"
+              >
+                <p class="text-[10px] text-slate-500">Maya</p>
+                <p class="text-sm font-semibold text-slate-900 num">16</p>
+              </div>
+              <div
+                class="rounded bg-slate-50 border border-slate-200 px-2 py-1.5 text-center"
+              >
+                <p class="text-[10px] text-slate-500">Devon</p>
+                <p class="text-sm font-semibold text-slate-900 num">12</p>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Cost per unit:
+              <span class="font-semibold text-slate-700">$35.00</span>
+            </p>
+          </article>
+
+          <!-- Commission · percent -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Margin-Based Commission
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-violet-700 px-1.5 py-0.5 rounded bg-violet-50 border border-violet-100"
+                >% · avg</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              42.8%<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +1.6 pp</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Team-average margin achieved. Commission is paid as 10% of margin.
+            </p>
+            <div class="mt-3">
+              <div
+                class="h-2 rounded-full bg-slate-100 overflow-hidden relative"
+              >
+                <div
+                  class="h-full bg-violet-500 rounded-full"
+                  style="width: 42.8%"
+                ></div>
+                <div
+                  class="absolute top-[-3px] h-3 w-0.5 bg-slate-400"
+                  style="left: 40%"
+                ></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                <span>0%</span>
+                <span class="text-slate-500">target 40%</span>
+                <span>100%</span>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Avg method · summing percentages would overcount.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ───────────────── Rating ───────────────── -->
+      <section id="rating" class="ruletype mt-14">
+        <div class="flex items-baseline justify-between mb-4">
+          <div>
+            <h2 class="serif text-3xl text-slate-900">Rating</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              Earnings tied to a quality signal — review counts, scores, or
+              positive-rate %.
+            </p>
+          </div>
+          <span
+            class="text-[10px] uppercase tracking-wider text-slate-400 px-2 py-1 rounded bg-slate-100"
+            >calculation_type · rating</span
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- Rating · dollar -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Per-Rating Bonus
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-emerald-700 px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-100"
+                >$ · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              $420<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +$80</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              14 × $30 per 5★ review. Bonus paid on each verified rating.
+            </p>
+            <div class="mt-3 flex items-end gap-1 h-12">
+              <div
+                class="flex-1 bg-emerald-200 rounded-sm"
+                style="height: 30%"
+              ></div>
+              <div
+                class="flex-1 bg-emerald-300 rounded-sm"
+                style="height: 50%"
+              ></div>
+              <div
+                class="flex-1 bg-emerald-300 rounded-sm"
+                style="height: 45%"
+              ></div>
+              <div
+                class="flex-1 bg-emerald-400 rounded-sm"
+                style="height: 70%"
+              ></div>
+              <div
+                class="flex-1 bg-emerald-500 rounded-sm"
+                style="height: 85%"
+              ></div>
+              <div
+                class="flex-1 bg-emerald-600 rounded-sm"
+                style="height: 100%"
+              ></div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              6-week trend · highest in the window.
+            </p>
+          </article>
+
+          <!-- Rating · units -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">5★ Reviews</p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-sky-700 px-1.5 py-0.5 rounded bg-sky-50 border border-sky-100"
+                >units · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              14<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +3 reviews</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Team total this period. Top: Amber at 6 reviews.
+            </p>
+            <div class="mt-3 space-y-1.5">
+              <div class="flex items-center gap-2 text-[11px]">
+                <span class="w-12 text-slate-500">Amber</span>
+                <div class="flex-1 h-2 rounded-full bg-slate-100">
+                  <div
+                    class="h-full bg-sky-500 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+                <span class="w-6 text-right text-slate-700 num">6</span>
+              </div>
+              <div class="flex items-center gap-2 text-[11px]">
+                <span class="w-12 text-slate-500">Carli</span>
+                <div class="flex-1 h-2 rounded-full bg-slate-100">
+                  <div
+                    class="h-full bg-sky-400 rounded-full"
+                    style="width: 83%"
+                  ></div>
+                </div>
+                <span class="w-6 text-right text-slate-700 num">5</span>
+              </div>
+              <div class="flex items-center gap-2 text-[11px]">
+                <span class="w-12 text-slate-500">Jordyn</span>
+                <div class="flex-1 h-2 rounded-full bg-slate-100">
+                  <div
+                    class="h-full bg-sky-300 rounded-full"
+                    style="width: 50%"
+                  ></div>
+                </div>
+                <span class="w-6 text-right text-slate-700 num">3</span>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Imputed value (if set):
+              <span class="text-amber-700 font-semibold">~$1,120</span>
+            </p>
+          </article>
+
+          <!-- Rating · percent -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">Positive Rating %</p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-violet-700 px-1.5 py-0.5 rounded bg-violet-50 border border-violet-100"
+                >% · avg</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              89.4%<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +1.8 pp</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Team-averaged % of customers rating ≥ 4★.
+            </p>
+            <svg
+              viewBox="0 0 240 50"
+              class="mt-3 w-full h-12"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="lc-r3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0,30 L40,28 L80,32 L120,26 L160,22 L200,20 L240,14 L240,50 L0,50 Z"
+                fill="url(#lc-r3)"
+              />
+              <polyline
+                points="0,30 40,28 80,32 120,26 160,22 200,20 240,14"
+                fill="none"
+                stroke="#8b5cf6"
+                stroke-width="2"
+              />
+              <circle cx="240" cy="14" r="2.5" fill="#8b5cf6" />
+            </svg>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Avg method · each rep&apos;s % weighted equally.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ───────────────── All-or-Nothing ───────────────── -->
+      <section id="aon" class="ruletype mt-14">
+        <div class="flex items-baseline justify-between mb-4">
+          <div>
+            <h2 class="serif text-3xl text-slate-900">All-or-Nothing</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              Threshold-based. Hit it, get the full payout; miss it, zero.
+            </p>
+          </div>
+          <span
+            class="text-[10px] uppercase tracking-wider text-slate-400 px-2 py-1 rounded bg-slate-100"
+            >calculation_type · all_or_nothing</span
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- A/N · dollar -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">Safety Bonus</p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-emerald-700 px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-100"
+                >$ · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">$300</p>
+            <p class="mt-1 text-xs text-slate-500">
+              Flat bonus per employee who met threshold (0 safety incidents).
+            </p>
+            <div class="mt-3 flex items-center gap-1.5">
+              <span
+                class="px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-semibold"
+                >Met</span
+              >
+              <span
+                class="px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-semibold"
+                >Met</span
+              >
+              <span
+                class="px-2 py-1 rounded-full bg-rose-100 text-rose-700 text-[10px] font-semibold"
+                >Miss</span
+              >
+              <span class="text-[11px] text-slate-500 ml-1"
+                >2 of 3 paid</span
+              >
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Total cost:
+              <span class="font-semibold text-slate-700">$600</span>
+              · 2 × $300
+            </p>
+          </article>
+
+          <!-- A/N · units -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Threshold Met
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-sky-700 px-1.5 py-0.5 rounded bg-sky-50 border border-sky-100"
+                >units · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              4
+              <span class="text-xs text-slate-500 ml-1 font-sans">of 5</span>
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Count of employees who hit the safety threshold this cycle.
+            </p>
+            <svg
+              viewBox="0 0 240 50"
+              class="mt-3 w-full h-12"
+              preserveAspectRatio="none"
+            >
+              <polyline
+                points="0,20 40,18 80,22 120,18 160,16 200,20 240,18"
+                fill="none"
+                stroke="#0ea5e9"
+                stroke-width="2"
+              />
+            </svg>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Same as prior cycle. No near-misses this period.
+            </p>
+          </article>
+
+          <!-- A/N · percent -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">Pass Rate</p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-violet-700 px-1.5 py-0.5 rounded bg-violet-50 border border-violet-100"
+                >% · avg</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              80%<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +5 pp</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Team-averaged % of attempts that met the threshold.
+            </p>
+            <div class="mt-3 grid grid-cols-5 gap-1">
+              <div class="h-8 rounded bg-emerald-500" title="Met"></div>
+              <div class="h-8 rounded bg-emerald-500" title="Met"></div>
+              <div class="h-8 rounded bg-emerald-500" title="Met"></div>
+              <div class="h-8 rounded bg-emerald-500" title="Met"></div>
+              <div class="h-8 rounded bg-rose-300" title="Miss"></div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Avg method · pass rate is inherently a ratio.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ───────────────── Piece Rate ───────────────── -->
+      <section id="piece" class="ruletype mt-14">
+        <div class="flex items-baseline justify-between mb-4">
+          <div>
+            <h2 class="serif text-3xl text-slate-900">Piece Rate</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              Flat amount paid per unit produced, with no tiering or thresholds.
+            </p>
+          </div>
+          <span
+            class="text-[10px] uppercase tracking-wider text-slate-400 px-2 py-1 rounded bg-slate-100"
+            >calculation_type · piece_rate</span
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- Piece rate · dollar -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Memberships Sold
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-emerald-700 px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-100"
+                >$ · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              $120<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +$60</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              6 memberships × $20. Doubled vs prior period.
+            </p>
+            <div class="mt-3 grid grid-cols-6 gap-1">
+              <div class="h-6 rounded bg-emerald-500"></div>
+              <div class="h-6 rounded bg-emerald-500"></div>
+              <div class="h-6 rounded bg-emerald-500"></div>
+              <div class="h-6 rounded bg-emerald-500"></div>
+              <div class="h-6 rounded bg-emerald-500"></div>
+              <div class="h-6 rounded bg-emerald-500"></div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Cost per membership:
+              <span class="font-semibold text-slate-700">$20.00</span>
+            </p>
+          </article>
+
+          <!-- Piece rate · units -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Safety Observations Logged
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-sky-700 px-1.5 py-0.5 rounded bg-sky-50 border border-sky-100"
+                >units · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              8<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +3</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Above the 6-observation target. Each unit pays $15.
+            </p>
+            <div class="mt-3 flex items-end gap-1 h-12">
+              <div
+                class="flex-1 bg-sky-300 rounded-sm"
+                style="height: 50%"
+              ></div>
+              <div
+                class="flex-1 bg-sky-300 rounded-sm"
+                style="height: 62%"
+              ></div>
+              <div
+                class="flex-1 bg-sky-400 rounded-sm"
+                style="height: 75%"
+              ></div>
+              <div
+                class="flex-1 bg-sky-500 rounded-sm"
+                style="height: 90%"
+              ></div>
+              <div
+                class="flex-1 bg-sky-600 rounded-sm"
+                style="height: 100%"
+              ></div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              5-week trend, current week tallest.
+            </p>
+          </article>
+
+          <!-- Piece rate · percent -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Pay-per-pp Improvement
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-violet-700 px-1.5 py-0.5 rounded bg-violet-50 border border-violet-100"
+                >% · avg</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              $80<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ 4 pp ×$20</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              $20 per percentage point of FCR lift over baseline (avg of team
+              members).
+            </p>
+            <div class="mt-3">
+              <div class="h-2 rounded-full bg-slate-100 relative">
+                <div
+                  class="absolute top-[-4px] h-4 w-0.5 bg-slate-400"
+                  style="left: 80%"
+                  title="Baseline 80%"
+                ></div>
+                <div
+                  class="h-full bg-violet-500 rounded-full"
+                  style="width: 84%"
+                ></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                <span>baseline 80%</span>
+                <span class="text-violet-700">team avg 84%</span>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Avg method · pp lift computed off team-avg FCR.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ───────────────── Tiers ───────────────── -->
+      <section id="tiers" class="ruletype mt-14">
+        <div class="flex items-baseline justify-between mb-4">
+          <div>
+            <h2 class="serif text-3xl text-slate-900">Tiers</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              Stepped payout — different amounts for different bands of the
+              underlying value.
+            </p>
+          </div>
+          <span
+            class="text-[10px] uppercase tracking-wider text-slate-400 px-2 py-1 rounded bg-slate-100"
+            >calculation_type · tiers</span
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- Tiers · dollar -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Completed Revenue
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-emerald-700 px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-100"
+                >$ · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              $7,000
+              <span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +13%</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Landed in the $6K–$8K band → $140 tier payout per rep.
+            </p>
+            <div class="mt-3 space-y-1.5">
+              <div
+                class="flex items-center justify-between text-[11px] rounded px-2 py-1 bg-slate-50"
+              >
+                <span class="text-slate-600">$8K+</span>
+                <span class="text-slate-400">$200</span>
+              </div>
+              <div
+                class="flex items-center justify-between text-[11px] rounded px-2 py-1 bg-emerald-50 border border-emerald-200"
+              >
+                <span class="font-semibold text-emerald-800">$6K – $8K</span>
+                <span class="font-semibold text-emerald-800">$140 ← you</span>
+              </div>
+              <div
+                class="flex items-center justify-between text-[11px] rounded px-2 py-1 bg-slate-50"
+              >
+                <span class="text-slate-600">$4K – $6K</span>
+                <span class="text-slate-400">$80</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Tiers · units -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">
+                Jobs Completed
+              </p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-sky-700 px-1.5 py-0.5 rounded bg-sky-50 border border-sky-100"
+                >units · sum</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              47
+              <span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +6 jobs</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Crossed the 45-job threshold → Tier 2 payout unlocked.
+            </p>
+            <div class="mt-3">
+              <div
+                class="flex h-3 rounded-full overflow-hidden border border-slate-200"
+              >
+                <div
+                  class="bg-slate-200"
+                  style="width: 25%"
+                  title="Tier 1: 0-30"
+                ></div>
+                <div
+                  class="bg-slate-300"
+                  style="width: 25%"
+                  title="Tier 2: 30-45"
+                ></div>
+                <div
+                  class="bg-sky-500"
+                  style="width: 25%"
+                  title="Tier 3: 45-60 ← current"
+                ></div>
+                <div
+                  class="bg-slate-100"
+                  style="width: 25%"
+                  title="Tier 4: 60+"
+                ></div>
+              </div>
+              <div
+                class="flex justify-between text-[10px] text-slate-400 mt-1"
+              >
+                <span>0</span><span>30</span><span class="text-sky-700"
+                  >45 · you 47</span
+                ><span>60</span><span>+</span>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Next tier at 60 jobs — 13 to go.
+            </p>
+          </article>
+
+          <!-- Tiers · percent -->
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="flex items-start justify-between mb-1">
+              <p class="text-sm font-semibold text-slate-900">CSAT Tier</p>
+              <span
+                class="text-[10px] uppercase tracking-wider text-violet-700 px-1.5 py-0.5 rounded bg-violet-50 border border-violet-100"
+                >% · avg</span
+              >
+            </div>
+            <p class="serif text-3xl text-slate-900 num">
+              92%<span class="text-xs text-emerald-700 ml-1 font-sans"
+                >↗ +2.5 pp</span
+              >
+            </p>
+            <p class="mt-1 text-xs text-slate-500">
+              Team-avg landed in the Gold band (≥ 92%).
+            </p>
+            <div class="mt-3 grid grid-cols-3 gap-1.5">
+              <div
+                class="rounded px-2 py-2 text-center bg-amber-50 border border-amber-300"
+              >
+                <p
+                  class="text-[10px] font-semibold uppercase text-amber-700"
+                >
+                  Gold
+                </p>
+                <p class="text-[10px] text-slate-500">≥ 92%</p>
+                <p class="text-xs font-semibold text-amber-800 mt-1 num">
+                  2 ← you
+                </p>
+              </div>
+              <div
+                class="rounded px-2 py-2 text-center bg-slate-50 border border-slate-200"
+              >
+                <p
+                  class="text-[10px] font-semibold uppercase text-slate-600"
+                >
+                  Silver
+                </p>
+                <p class="text-[10px] text-slate-400">85–91%</p>
+                <p class="text-xs font-semibold text-slate-700 mt-1 num">2</p>
+              </div>
+              <div
+                class="rounded px-2 py-2 text-center bg-slate-50 border border-slate-200"
+              >
+                <p
+                  class="text-[10px] font-semibold uppercase text-slate-600"
+                >
+                  None
+                </p>
+                <p class="text-[10px] text-slate-400">&lt; 85%</p>
+                <p class="text-xs font-semibold text-slate-700 mt-1 num">1</p>
+              </div>
+            </div>
+            <p class="mt-3 text-[11px] text-slate-500">
+              Avg method · band determined by team-avg %, not sum.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="mt-16 pt-6 border-t border-slate-200 text-xs text-slate-500">
+        15 cards · 5 rule types × 3 formats. Aggregation is summed for dollar
+        and unit metrics; averaged for percentages.
+      </footer>
+    </main>
+  </body>
+</html>
