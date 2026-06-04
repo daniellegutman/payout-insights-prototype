@@ -43,8 +43,7 @@
           <a href="#rating" class="hover:text-violet-700">Rating</a>
           <a href="#aon" class="hover:text-violet-700">All-or-Nothing</a>
           <a href="#prorated" class="hover:text-violet-700">Prorated</a>
-          <a href="#steps" class="hover:text-violet-700">Steps</a>
-          <a href="#tiers" class="hover:text-violet-700">Tiers</a>
+          <a href="#steps" class="hover:text-violet-700">Steps / Tiers</a>
         </nav>
       </div>
     </header>
@@ -77,7 +76,7 @@
           <p>
             <strong>Format constraints:</strong> Commission is always currency.
             Rating is always a number. Prorated renders the same as
-            All-or-Nothing.
+            All-or-Nothing. Tiers render the same as Steps.
           </p>
         </div>
       </div>
@@ -703,15 +702,16 @@
       <section id="steps" class="ruletype mt-14">
         <div class="flex items-baseline justify-between mb-4">
           <div>
-            <h2 class="serif text-3xl text-slate-900">Steps</h2>
+            <h2 class="serif text-3xl text-slate-900">Steps / Tiers</h2>
             <p class="mt-1 text-sm text-slate-500">
-              Cumulative ladder — each new step unlocks a bigger payout. Show
-              team-avg of the metric and which step it&apos;s on.
+              Ranges of the underlying metric, each mapped to a payout. Whether
+              labeled Step 1–4 or Bronze / Silver / Gold, the card is the same:
+              team-avg, current band, and per-employee ranking.
             </p>
           </div>
           <span
             class="text-[10px] uppercase tracking-wider text-slate-400 px-2 py-1 rounded bg-slate-100"
-            >calc · steps</span
+            >calc · steps / tiers</span
           >
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -1007,8 +1007,8 @@
 
 
       <footer class="mt-16 pt-6 border-t border-slate-200 text-xs text-slate-500">
-        14 cards · 6 rule types. Commission and Rating render in a fixed
-        format; All-or-Nothing, Prorated, Steps, and Tiers each render in
+        11 cards · 5 rule types. Commission and Rating render in a fixed
+        format; All-or-Nothing, Prorated, and Steps / Tiers each render in
         dollars, units, or percentages. Commission aggregates by sum;
         everything else by average.
       </footer>
